@@ -1,0 +1,37 @@
+<mvc:View
+    controllerName="weatherfioriapp.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+>
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+					<VBox class="teste">
+						<Panel headerText="{i18n>todayInfo}">
+							<FlexBox
+								height="150px"
+								alignItems="Center"
+								justifyContent="Center">
+								<GenericTile 
+									id="idIttle1" 
+									class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+									header="Today"
+									subheader="Frio!" 
+									press="press">
+										<TileContent unit="São Paulo" footer="BR">
+											<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+										</TileContent>									
+								</GenericTile>
+							</FlexBox>
+						</Panel>
+					</VBox>
+						
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

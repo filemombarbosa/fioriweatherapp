@@ -1,0 +1,21 @@
+{
+  "name": "weatherfioriapp",
+  "version": "1.0.0",
+  "description": "Weather Fiori App developed using SAPUI5 freestyle.",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/filemombarbosa/weatherfioriapp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/filemombarbosa/weatherfioriapp/issues"
+  },
+  "homepage": "https://github.com/filemombarbosa/weatherfioriapp#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
