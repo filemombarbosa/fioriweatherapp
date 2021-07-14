@@ -59,7 +59,7 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
  <sub><b>Filemom Barbosa</b></sub></a> <a href="https://github.com/filemombarbosa title="Github">🚀</a>
 
 
-Developed with ❤️📚 by Filemom Barbosa 🙌
+Developed with ❤️ & 📚 by Filemom Barbosa 🙌
 
 [![Sap Badge](https://img.shields.io/badge/-@tgmarinho-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/tgmarinho)](https://people.sap.com/filemombarbosa) 
 [![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
