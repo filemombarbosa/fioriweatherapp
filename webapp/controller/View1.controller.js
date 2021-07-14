@@ -148,9 +148,7 @@ sap.ui.define([
 						reject(sApiKeyIsValid);
 					}
 				});
-			},
-
-			
+			},	
 			
 			checkCityName: function () {
 				

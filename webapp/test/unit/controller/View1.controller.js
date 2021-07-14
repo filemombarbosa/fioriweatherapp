@@ -37,7 +37,7 @@ sap.ui.define([
 				aNotFounMethods.push(sFunctionName);
 				sAllFunctionsExist = false;
 			}			 
-		});	
+		});
 		
 		if (aNotFounMethods.length > 0) {
 			console.error('Not found methods: ' + aNotFounMethods)
@@ -90,4 +90,13 @@ sap.ui.define([
 			done();
 		});
 	});
+	
+	QUnit.test("It should check for valid city", function (assert) {
+		var oController = new Controller();
+		var result = oController.checkCityName();
+
+		assert.ok(result);
+	});
+
+
 });
