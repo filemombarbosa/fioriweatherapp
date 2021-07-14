@@ -148,11 +148,61 @@ sap.ui.define([
 						reject(sApiKeyIsValid);
 					}
 				});
-			},	
+			},
+
+			getCityModel: function () {
+				var teste =  [
+					{
+						"id": 4565111,
+						"name": "Guayanilla",
+						"state": "",
+						"country": "PR",
+						"coord": {
+							"lon": -66.79184,
+							"lat": 18.019131
+						}
+					},
+				]
+		
+
+				
+
+
+
+				var sApiKeyFound 		= false;
+				var sApiConfigFilePath 	= jQuery.sap.getModulePath("fioriweatherapp", "/model/openweathermap.json"); 
+				var oModel 				= new JSONModel(sApiConfigFilePath);
+
+				return new Promise(function(resolve, reject) {
+					try {
+						oModel.attachRequestCompleted(function(event) {
+							var sApiKey = event.getSource().getData().apiKey || false;
+
+							if (event.getSource().getData()) {
+								resolve(sApiKey);
+
+
+								/* var oModel 				= new JSONModel(teste);
+								this.getView().setModel(oModel); */
+							}
+
+							reject(sApiKeyFound);							
+						});
+					} catch (error) {
+						console.error('Error during the API Key search');
+						reject(sApiKeyFound);
+					}
+				});
+
+			},
+
+			setCityModel: function () {
+				
+			},
 			
 			checkCityName: function () {
 				
-			},						
+			},
 
 			getTilesModel: function () {
 				
@@ -164,7 +214,7 @@ sap.ui.define([
 
 			getWeatherForecast: function () {
 				
-			},		
+			},
 
 			handleWeatherForecastFailer: function () {
 				

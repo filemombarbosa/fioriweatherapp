@@ -91,12 +91,12 @@ sap.ui.define([
 		});
 	});
 	
-	QUnit.test("It should check for valid city", function (assert) {
+/* 	QUnit.test("It should check for valid city", function (assert) {
 		var oController = new Controller();
-		var result = oController.checkCityName();
+		var result = oController.getCityModel();
 
 		assert.ok(result);
-	});
+	}); */
 
 
 });
