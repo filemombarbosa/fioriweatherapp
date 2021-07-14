@@ -14,7 +14,7 @@ Weather Fiori App is an web application developed using SAPUI5 freestyle, that p
 
 # How to use
 ## How to setup the development environment
-**Prerequisites to run locally**
+### Prerequisites to run locally
 - Nodejs
 
 **Run the following commands in your console**
@@ -40,6 +40,8 @@ http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 $ npm test
 ```
 Open the URL shown in the console
+```bash
 http://localhost:9091/test/unit/unitTests.qunit.html
+```
 
 ## How to deploy the app
