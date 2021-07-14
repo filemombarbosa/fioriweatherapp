@@ -29,7 +29,7 @@ $ npm start #Or node server.js
 $ PORT=[PORT NUMBER] npm start #Or PORT=[PORT NUMBER] node server.js
 ```
 
-### Open the URL shown in the console
+Open the URL shown in the console
 http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 
 ## How run the Unit tests 
@@ -37,7 +37,7 @@ http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 # Start the App at port 9190
 $ npm test
 ```
-### Open the URL shown in the console
+Open the URL shown in the console
 http://localhost:9091/test/unit/unitTests.qunit.html
 
 ## How to deploy the app
