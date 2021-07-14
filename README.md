@@ -7,7 +7,7 @@
 <p align="center">Simple Weather App for Fiori Like Needs! 🚀</p>
 
 
-## Overview
+# Overview
 Fiori Weather App is an web application developed using SAPUI5 freestyle, that provides information about the weather.
 
 - **Weather API** - https://openweathermap.org
