@@ -61,6 +61,6 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 
 Developed with ❤️ & 📚 by Filemom Barbosa 🙌
 
-[![Sap Badge](https://img.shields.io/badge/-@tgmarinho-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/tgmarinho)](https://people.sap.com/filemombarbosa) 
-[![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/tgmarinho/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
-[![Gmail Badge](https://img.shields.io/badge/-tgmarinho@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:filemombarbosa@gmail.com)](mailto:filemombarbosa@gmail.com)
+[![Sap Badge](https://img.shields.io/badge/-@filemombarbosa-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/filemombarbosa)](https://people.sap.com/filemombarbosa) 
+[![Linkedin Badge](https://img.shields.io/badge/-Thiago-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filemombarbosa/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
+[![Gmail Badge](https://img.shields.io/badge/-filemombarbosa@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:filemombarbosa@gmail.com)](mailto:filemombarbosa@gmail.com)
