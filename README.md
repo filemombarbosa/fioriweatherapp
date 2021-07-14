@@ -34,7 +34,7 @@ Open the URL shown in the console:
 http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
 
-## How run the Unit tests 
+## How run the Unit Tests 
 Run the following command in your console:
 ```bash
 # Get the url of the Unit Tests runner
