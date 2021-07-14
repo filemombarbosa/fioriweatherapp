@@ -42,7 +42,7 @@ $ npm test
 ```
 Open the URL shown in the console:
 ```bash
-http://localhost:9091/test/unit/unitTests.qunit.html
+http://localhost:9091/test/unit/unitTests.qunit.html or http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ```
 
 ## How to deploy the app
