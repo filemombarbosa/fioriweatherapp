@@ -11,7 +11,37 @@ sap.ui.define([
 				this.teste();
 			},
 
-			
+			checkApiKey: function () {
+				
+			},
+
+			checkServiceAvailability: function () {
+				
+			},
+
+			getTilesModel: function () {
+				
+			},
+
+			setTilesModel: function () {
+				
+			},
+
+			getWeatherForecast: function () {
+				
+			},
+
+			makeHttpRequest: function () {
+				
+			},
+
+			handleWeatherForecastFailer: function () {
+				
+			},
+
+			handleWeatherForecastExeption: function () {
+				
+			},
 
 			teste: function () {
 				var teste = 1 + 2;

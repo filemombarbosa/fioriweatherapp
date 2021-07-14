@@ -9,27 +9,32 @@ sap.ui.define([
 
 	QUnit.test("It should call the init method", function (assert) {
 		var oController = new Controller();
-		//debugger
 		oController.onInit();
 		assert.ok(oController);
 	});
 
 	QUnit.test("I should find all main functions", function (assert) {
-		var oController = new Controller();
-		var oControllerMethod = oController.getMetadata().getAllMethods();
-		var aMainFunctionList = [
+		var oController 		= new Controller();
+		var oControllerMethod 	= oController.getMetadata().getAllMethods();
+		var sAllFunctionsExist 	= true;
+		var aMainFunctionList 	= [			
 			'checkApiKey',
-			'checkServiceAvailability',
+			'checkServiceAvailability',			
+			'getTilesModel',
+			'setTilesModel',			
+			'getWeatherForecast',
+			'makeHttpRequest',
+			'handleWeatherForecastFailer',
+			'handleWeatherForecastExeption',
+		];
+		
+		aMainFunctionList.forEach(sFunctionName => {
+			if(!oControllerMethod.hasOwnProperty(sFunctionName)){
+				sAllFunctionsExist = false;
+			}			 
+		})
 
-		]
-		oControllerMethods.hasOwnProperty('teste')
-
-		var teste = {teste:123}
-		var teste2 = {teste:1123}
-
-		assert.ok(teste, teste2)
-
-		//assert.ok(oController);
+		assert.ok(sAllFunctionsExist);
 	});
 
 });
