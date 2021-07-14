@@ -8,6 +8,16 @@ sap.ui.define([
 
 		return Controller.extend("fioriweatherapp.controller.View1", {
 			onInit: function () {
+				this.teste();
+			},
+
+			
+
+			teste: function () {
+				var teste = 1 + 2;
+			},
+
+			setupModel: function () {
 				var _this = this,
 					oRequestParameter = {
 						sCityName: 'são paulo'
@@ -47,7 +57,6 @@ sap.ui.define([
 				var sPath = jQuery.sap.getModulePath("sap.suite.ui.microchart.sample.LineMicroChartGenericTile", "/SampleData.json");
 				var oModel = new JSONModel(oWeekChartModel);
 				this.getView().setModel(oModel);
-
 			},
 
 			execApiRequestCurrentWeather: function (oRequestParameter) {

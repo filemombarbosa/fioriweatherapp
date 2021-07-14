@@ -13,7 +13,7 @@ Weather Fiori App is an web application developed using SAPUI5 freestyle, that p
 - **Weather API** - https://openweathermap.org
 
 # How to use
-## DEVELOPMENT & TEST
+## How to setup the development environment
 ### Prerequisites to run locally
 - Nodejs
 
@@ -30,8 +30,14 @@ $ PORT=[PORT NUMBER] npm start #Or PORT=[PORT NUMBER] node server.js
 ```
 
 ### Open the URL shown in the console
-http://localhost:9091/index.html
+http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 
-http://localhost:[PORT NUMBER]/index.html
+## How run the Unit tests 
+```bash
+# Start the App at port 9190
+$ npm test
+```
+### Open the URL shown in the console
+http://localhost:9091/test/unit/unitTests.qunit.html
 
-## DEPLOY
+## How to deploy the app

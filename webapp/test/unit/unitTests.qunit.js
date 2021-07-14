@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"fioriweatherapp/fioriweatherapp/test/unit/AllTests"
+		"fioriweatherapp/test/unit/AllTests"
 	], function () {
 		QUnit.start();
 	});
