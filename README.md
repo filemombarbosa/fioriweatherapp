@@ -17,8 +17,6 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, that p
 **Prerequisites to run locally**
 - Nodejs
 
----
-
 Run the following commands in your console:
 ```bash
 # Download the App from the Repository
