@@ -35,8 +35,9 @@ http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
 
 ## How run the Unit tests 
+**Run the following command in your console**
 ```bash
-# Start the App at port 9190
+# Get the url of the Unit Tests runner
 $ npm test
 ```
 Open the URL shown in the console
