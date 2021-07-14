@@ -15,13 +15,12 @@ Weather Fiori App is an web application developed using SAPUI5 freestyle, that p
 # How to use
 ## DEVELOPMENT & TEST
 ### Prerequisites to run locally
-- Git
 - Nodejs
 
 ### Run the following commands in your console
 ```bash
 # Download the App from the Repository
-$ git clone https://github.com/filemombarbosa/weatherfioriapp.git
+$ git clone https://github.com/filemombarbosa/fioriweatherapp.git
 
 # Start the App at port 9190
 $ npm start #Or node server.js

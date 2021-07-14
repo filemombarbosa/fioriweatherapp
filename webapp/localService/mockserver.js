@@ -7,7 +7,7 @@ sap.ui.define([
     "use strict";
 
     var oMockServer,
-        _sAppPath = "weatherfioriapp.weatherfioriapp/",
+        _sAppPath = "fioriweatherapp.fioriweatherapp/",
         _sJsonFilesPath = _sAppPath + "localService/mockdata";
 
     var oMockServerInterface = {

@@ -1,18 +1,53 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/m/MessageBox",
+	"sap/ui/model/json/JSONModel"
 ],
-	function (Controller, MessageBox) {
+	function (Controller, MessageBox, JSONModel) {
 		"use strict";
 
-		return Controller.extend("weatherfioriapp.controller.View1", {
+		return Controller.extend("fioriweatherapp.controller.View1", {
 			onInit: function () {
 				var _this = this,
 					oRequestParameter = {
 						sCityName: 'são paulo'
 					}
 
-				_this.execApiRequestCurrentWeather(oRequestParameter);
+				//_this.execApiRequestCurrentWeather(oRequestParameter);
+
+				var oWeekChartModel = {
+					"lines": [
+					  {
+						"points": [
+						  {"x": 0, "y": 35},
+						  {"x": 20, "y": 53},
+						  {"x": 40, "y": 10},
+						  {"x": 60, "y": 30},
+						  {"x": 80, "y": 52},
+						  {"x": 100, "y": 73}
+						]
+					  }
+					],
+					"size": "Responsive",
+					"threshold": 40,
+					"chartTwoColors": {
+						"showPoints": true,
+						"color": {"above": "Good", "below": "Error"}
+					},
+					"chartNoThreshold": {
+						"threshold": null,
+						"showPoints": true,
+						"color": {"above": "Good", "below": "Critical"}
+					},
+
+					
+				}
+				
+
+				var sPath = jQuery.sap.getModulePath("sap.suite.ui.microchart.sample.LineMicroChartGenericTile", "/SampleData.json");
+				var oModel = new JSONModel(oWeekChartModel);
+				this.getView().setModel(oModel);
+
 			},
 
 			execApiRequestCurrentWeather: function (oRequestParameter) {

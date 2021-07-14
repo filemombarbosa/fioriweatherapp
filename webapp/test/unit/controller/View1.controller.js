@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"weatherfioriapp/weatherfioriapp/controller/View1.controller"
+	"fioriweatherapp/fioriweatherapp/controller/View1.controller"
 ], function (Controller) {
 	"use strict";
 

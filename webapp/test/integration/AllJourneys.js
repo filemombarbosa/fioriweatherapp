@@ -7,7 +7,7 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
-		viewNamespace: "weatherfioriapp.weatherfioriapp.view.",
+		viewNamespace: "fioriweatherapp.fioriweatherapp.view.",
 		autoWait: true
 	});
 });
