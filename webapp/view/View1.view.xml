@@ -18,7 +18,7 @@
 					<ToolbarSpacer/>
 					<HBox>
 						<Label text="Dark Mode" />
-						<Switch state="false" customTextOn="ON" customTextOff="OFF">
+						<Switch change=".onChangeTheme" state="false" customTextOn="ON" customTextOff="OFF">
 							<layoutData>
 								<FlexItemData growFactor="1" />
 							</layoutData>
@@ -31,24 +31,21 @@
 						<HBox class="sapUiLargeMarginTop" justifyContent="Center">
 							<items >
 								<Input
-									id="inputValueHelpCustomIcon"
+									id="idInputCity"
 									width="100%"
 									class="sapUiSmallMarginBottom"
 									type="Text"
-									placeholder="Enter the city name"
 									showValueHelp="true"
-									valueHelpIconSrc="sap-icon://sys-find"
 									showSuggestion="true"
-									suggestionItems="{/}"
-									suggest=".onSuggest">
+									valueHelpIconSrc="sap-icon://sys-find"
+									placeholder="Enter the city name"
+									suggestionItems="{oModelCity>/}"
+									valueHelpRequest=".onPressSearch"
+								>
 									<suggestionItems>
-										<core:Item text="{name}" />
+										<core:Item text="{oModelCity>city}" />
 									</suggestionItems>
 								</Input>
-
-									
-									
-									
 							</items>
 						</HBox>
 
@@ -62,58 +59,148 @@
 										title="">
 
 											<GenericTile 
-												width="20rem"
+												width="15rem"
 												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-												header="Today"
-												subheader="Frio!" 
+												header="Weather forecast for the next 5 days"
+												subheader="{oModelWeaatherFormatted>/oCityInfo/sCityName}">
+												<TileContent unit="{oModelWeaatherFormatted>/oCityInfo/sCountry}" footer="{oModelWeaatherFormatted>/oCityInfo/sCityName}">
+													<ImageContent src="sap-icon://cloud" />
+												</TileContent>
+											</GenericTile>
+
+											<GenericTile 
+												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+												header="{oModelWeaatherFormatted>/aFirstWeatherOutput/0/sDayName} {oModelWeaatherFormatted>/aFirstWeatherOutput/0/sDate}"
+												subheader="{oModelWeaatherFormatted>/aFirstWeatherOutput/0/sDesc}" 
 												press="press">
-													<TileContent unit="São Paulo" footer="BR">
-														<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+													<TileContent unit="Min {oModelWeaatherFormatted>/aFirstWeatherOutput/0/sMinTemperature} | Max {oModelWeaatherFormatted>/aFirstWeatherOutput/0/sMaxTemperature}" footer=""> 
+														<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/0/sTemperature}" icon="{oModelWeaatherFormatted>/aFirstWeatherOutput/0/sIcon}" withMargin="false" />
 													</TileContent>									
 											</GenericTile>
 
 											<GenericTile 
 												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-												header="Today"
-												subheader="Frio!" 
+												header="{oModelWeaatherFormatted>/aFirstWeatherOutput/1/sDayName} {oModelWeaatherFormatted>/aFirstWeatherOutput/1/sDate}"
+												subheader="{oModelWeaatherFormatted>/aFirstWeatherOutput/1/sDesc}" 
 												press="press">
-													<TileContent unit="São Paulo" footer="BR">
-														<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+													<TileContent unit="Min {oModelWeaatherFormatted>/aFirstWeatherOutput/1/sMinTemperature} | Max {oModelWeaatherFormatted>/aFirstWeatherOutput/1/sMaxTemperature}" footer=""> 
+														<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/1/sTemperature}" icon="{oModelWeaatherFormatted>/aFirstWeatherOutput/1/sIcon}" withMargin="false" />
 													</TileContent>									
 											</GenericTile>
 
 											<GenericTile 
 												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-												header="Today"
-												subheader="Frio!" 
+												header="{oModelWeaatherFormatted>/aFirstWeatherOutput/2/sDayName} {oModelWeaatherFormatted>/aFirstWeatherOutput/2/sDate}"
+												subheader="{oModelWeaatherFormatted>/aFirstWeatherOutput/2/sDesc}" 
 												press="press">
-													<TileContent unit="São Paulo" footer="BR">
-														<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+													<TileContent unit="Min {oModelWeaatherFormatted>/aFirstWeatherOutput/2/sMinTemperature} | Max {oModelWeaatherFormatted>/aFirstWeatherOutput/2/sMaxTemperature}" footer=""> 
+														<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/2/sTemperature}" icon="{oModelWeaatherFormatted>/aFirstWeatherOutput/2/sIcon}" withMargin="false" />
 													</TileContent>									
 											</GenericTile>
 
 											<GenericTile 
 												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-												header="Today"
-												subheader="Frio!" 
+												header="{oModelWeaatherFormatted>/aFirstWeatherOutput/3/sDayName} {oModelWeaatherFormatted>/aFirstWeatherOutput/3/sDate}"
+												subheader="{oModelWeaatherFormatted>/aFirstWeatherOutput/3/sDesc}" 
 												press="press">
-													<TileContent unit="São Paulo" footer="BR">
-														<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+													<TileContent unit="Min {oModelWeaatherFormatted>/aFirstWeatherOutput/3/sMinTemperature} | Max {oModelWeaatherFormatted>/aFirstWeatherOutput/3/sMaxTemperature}" footer=""> 
+														<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/3/sTemperature}" icon="{oModelWeaatherFormatted>/aFirstWeatherOutput/3/sIcon}" withMargin="false" />
 													</TileContent>									
 											</GenericTile>
 
 											<GenericTile 
 												class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-												header="Today"
-												subheader="Frio!" 
+												header="{oModelWeaatherFormatted>/aFirstWeatherOutput/4/sDayName} {oModelWeaatherFormatted>/aFirstWeatherOutput/4/sDate}"
+												subheader="{oModelWeaatherFormatted>/aFirstWeatherOutput/4/sDesc}" 
 												press="press">
-													<TileContent unit="São Paulo" footer="BR">
-														<NumericContent value="11 C" icon="sap-icon://umbrella" withMargin="false" />
+													<TileContent unit="Min {oModelWeaatherFormatted>/aFirstWeatherOutput/4/sMinTemperature} | Max {oModelWeaatherFormatted>/aFirstWeatherOutput/4/sMaxTemperature}" footer=""> 
+														<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/4/sTemperature}" icon="{oModelWeaatherFormatted>/aFirstWeatherOutput/4/sIcon}" withMargin="false" />
 													</TileContent>									
 											</GenericTile>
+										
+									</l:BlockLayoutCell>
+								</l:BlockLayoutRow>
+
+								<l:BlockLayoutRow>
+									<l:BlockLayoutCell title="">
+										<GenericTile
+											width="235px"
+											header="Weather overview"
+											frameType="TwoByOne"
+											press="press"
+											class="sapUiTinyMargin">
+											<TileContent footer="Week view" frameType="TwoByOne">
+												<mc:LineMicroChart
+													threshold="{/chartNoThreshold/threshold}"
+													size="{/size}"
+													showPoints="{/chartNoThreshold/showPoints}"
+													color="{/chartNoThreshold/color}"
+													lines="{
+														path: '/lines',
+														templateShareable: 'true'
+													}">
+													<mc:lines>
+														<mc:LineMicroChartLine
+																points="{
+																		path: 'points',
+																		templateShareable: true
+																	}">
+															<mc:LineMicroChartPoint x="{x}" y="{y}"/>
+														</mc:LineMicroChartLine>
+													</mc:lines>
+												</mc:LineMicroChart>
+											</TileContent>
+										</GenericTile>
+
+										<GenericTile 
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+											header="Humidity"
+											subheader="">
+												<TileContent unit="Pressure {oModelWeaatherFormatted>/aFirstWeatherOutput/0/sPressure}" footer=""> 
+													<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/0/sHumidity}" icon="sap-icon://line-charts" withMargin="false" />
+												</TileContent>									
+										</GenericTile>
+
+										<GenericTile 
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+											header="Humidity"
+											subheader="">
+												<TileContent unit="Pressure {oModelWeaatherFormatted>/aFirstWeatherOutput/1/sPressure}" footer=""> 
+													<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/1/sHumidity}" icon="sap-icon://line-charts" withMargin="false" />
+												</TileContent>									
+										</GenericTile>
+
+										<GenericTile 
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+											header="Humidity"
+											subheader="">
+												<TileContent unit="Pressure {oModelWeaatherFormatted>/aFirstWeatherOutput/2/sPressure}" footer=""> 
+													<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/2/sHumidity}" icon="sap-icon://line-charts" withMargin="false" />
+												</TileContent>									
+										</GenericTile>
+
+										<GenericTile 
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+											header="Humidity"
+											subheader="">
+												<TileContent unit="Pressure {oModelWeaatherFormatted>/aFirstWeatherOutput/3/sPressure}" footer=""> 
+													<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/3/sHumidity}" icon="sap-icon://line-charts" withMargin="false" />
+												</TileContent>									
+										</GenericTile>
+
+										<GenericTile 
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+											header="Humidity"
+											subheader="">
+												<TileContent unit="Pressure {oModelWeaatherFormatted>/aFirstWeatherOutput/4/sPressure}" footer=""> 
+													<NumericContent value="{oModelWeaatherFormatted>/aFirstWeatherOutput/4/sHumidity}" icon="sap-icon://line-charts" withMargin="false" />
+												</TileContent>									
+										</GenericTile>
 
 									</l:BlockLayoutCell>
 								</l:BlockLayoutRow>
+
+								
 
 								<!-- <l:BlockLayoutRow>
 									<l:BlockLayoutCell title="">

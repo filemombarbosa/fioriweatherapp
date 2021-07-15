@@ -20,13 +20,20 @@ sap.ui.define([
 		var aNotFounMethods 	= [];
 		var aMainFunction 		= [	
 			'makeHttpRequest',		
-			'getApiKey',
+			'getApiConfigModel',
 			'checkServiceAvailability',
 			'checkApiKey',			
-			'checkCityName',
+			'getCityModel',
+			'setCityModel',						
+			'getWeatherForecast',
+			'formatWeatherApiResponse',
+			'setWeatherForecastModel',
+			'formatWeatherApiResponse',
+			'setApiConfigModel',
+			'formatDateUtc',
+
 			'getTilesModel',
 			'setTilesModel',			
-			'getWeatherForecast',			
 			'handleWeatherForecastFailer',
 			'handleWeatherForecastExeption',
 			'showErrorCaseByStatusCode',
@@ -50,7 +57,7 @@ sap.ui.define([
 		var done 		= assert.async();
 		var oController = new Controller();
 
-		oController.getApiKey()
+		oController.getApiConfigModel()
 		.then(result => {
 			assert.ok(result);
 			done();
@@ -86,17 +93,45 @@ sap.ui.define([
 			done();
 		})
 		.catch(function(err) {
-			console.error('Error found in the API service check');
+			console.error('Error found check the Weather API Key service status');
 			done();
 		});
 	});
 	
-/* 	QUnit.test("It should check for valid city", function (assert) {
+	QUnit.test("It should get the city model", function (assert) {
+		var done 		= assert.async();
 		var oController = new Controller();
-		var result = oController.getCityModel();
 
-		assert.ok(result);
-	}); */
+		oController.getCityModel()
+		.then(result => {
+			assert.ok(result);
+			done();
+		})
+		.catch(function(err) {
+			console.error('Error found in get the city model');
+			done();
+		});
+	});
 
+	QUnit.test("It should get the weather forecast for a given city", function (assert) {
+		var done 		= assert.async();
+		var oController = new Controller();
+
+		oController.getWeatherForecast('Sao paulo')
+		.then(result => {
+			assert.ok(result);
+			done();
+		})
+		.catch(function(err) {
+			console.error('Error found in the weather forecast');
+			done();
+		});
+	});
+	
+	QUnit.test("It should convert UTC time to dd/mm/yyyy format", function (assert) {
+		var oController = new Controller();
+		var result = oController.formatDateUtc(1626317953);
+		assert.equal(result, '14/07/2021');
+	});
 
 });

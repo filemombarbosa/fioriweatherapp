@@ -8,7 +8,10 @@ sap.ui.define([
 
 		return Controller.extend("fioriweatherapp.controller.View1", {
 			onInit: function () {
-				
+				//var _this = this;
+
+				this.setApiConfigModel()
+				this.setCityModel();
 			},
 
 			makeHttpRequest: function (oRequestConfig) {
@@ -48,18 +51,16 @@ sap.ui.define([
 				});
 			},
 
-			getApiKey: function () {
-				var sApiKeyFound 		= false;
-				var sApiConfigFilePath 	= jQuery.sap.getModulePath("fioriweatherapp", "/config/openweathermap.json"); 
-				var oModel 				= new JSONModel(sApiConfigFilePath);
+			getApiConfigModel: function () {
+				var sApiKeyFound 	= false;
+				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/config/openweathermap.json"); 
+				var oModel 			= new JSONModel(sFilePath);
 
 				return new Promise(function(resolve, reject) {
 					try {
 						oModel.attachRequestCompleted(function(event) {
-							var sApiKey = event.getSource().getData().apiKey || false;
-
-							if (sApiKey && sApiKey!= "") {
-								resolve(sApiKey);
+							if (event.getSource().getData()) {
+								resolve(oModel);
 							}
 
 							reject(sApiKeyFound);							
@@ -72,18 +73,18 @@ sap.ui.define([
 			},
 
 			checkServiceAvailability: function (sWaitForResponseMaxTime) {
-				var getApiKey 			= this.getApiKey;
-				var makeHttpRequest 	= this.makeHttpRequest;
-				var showErrorCaseByStatusCode = this.showErrorCaseByStatusCode;
-				
-				var sServiceIsAvailable = false;
+				var getApiConfigModel 		= this.getApiConfigModel;
+				var makeHttpRequest 			= this.makeHttpRequest;
+				var showErrorCaseByStatusCode 	= this.showErrorCaseByStatusCode;				
+				var sServiceIsAvailable 		= false;
 
 				return new Promise(function(resolve, reject) {
 					try {
-						getApiKey()
-						.then(sApiKey => {
-							var oRequestConfig = {
-								sUrlEndPoint: `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${sApiKey}`,
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
 								sMethod: "POST", 
 								sWaitForResponseMaxTime: sWaitForResponseMaxTime
 							}
@@ -112,16 +113,17 @@ sap.ui.define([
 			},
 
 			checkApiKey: function (sWaitForResponseMaxTime) {
-				var getApiKey 		= this.getApiKey;
-				var makeHttpRequest = this.makeHttpRequest;
-				var sApiKeyIsValid 	= false;
+				var getApiConfigModel 	= this.getApiConfigModel;
+				var makeHttpRequest 		= this.makeHttpRequest;
+				var sApiKeyIsValid 			= false;
 
 				return new Promise(function(resolve, reject) {
 					try {
-						getApiKey()
-						.then(sApiKey => {
-							var oRequestConfig = {
-								sUrlEndPoint: `https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=${sApiKey}`,
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
 								sMethod: "POST", 
 								sWaitForResponseMaxTime: sWaitForResponseMaxTime
 							}
@@ -150,55 +152,252 @@ sap.ui.define([
 				});
 			},
 
-			getCityModel: function () {
-				var teste =  [
-					{
-						"id": 4565111,
-						"name": "Guayanilla",
-						"state": "",
-						"country": "PR",
-						"coord": {
-							"lon": -66.79184,
-							"lat": 18.019131
-						}
-					},
-				]
-		
-
-				
-
-
-
-				var sApiKeyFound 		= false;
-				var sApiConfigFilePath 	= jQuery.sap.getModulePath("fioriweatherapp", "/model/openweathermap.json"); 
-				var oModel 				= new JSONModel(sApiConfigFilePath);
+			getCityModel: function () {	
+				var sDataIsLoaded	= false;
+				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/model/city.list.br.json"); 
+				var oModel 			= new JSONModel(sFilePath);
 
 				return new Promise(function(resolve, reject) {
 					try {
 						oModel.attachRequestCompleted(function(event) {
-							var sApiKey = event.getSource().getData().apiKey || false;
-
-							if (event.getSource().getData()) {
-								resolve(sApiKey);
-
-
-								/* var oModel 				= new JSONModel(teste);
-								this.getView().setModel(oModel); */
+							if (event.getSource().getData() && event.getSource().getData().length > 0) {
+								resolve(oModel);
 							}
 
-							reject(sApiKeyFound);							
+							reject(sDataIsLoaded);							
 						});
 					} catch (error) {
 						console.error('Error during the API Key search');
-						reject(sApiKeyFound);
+						reject(sDataIsLoaded);
 					}
 				});
+			},
 
+			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {				
+				var getApiConfigModel 	= this.getApiConfigModel;
+				var makeHttpRequest 		= this.makeHttpRequest;
+
+				return new Promise(function(resolve, reject) {
+					try {
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/${oApiConfig.apiService}?q=${sCityName}&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
+								sMethod: "POST", 
+								sWaitForResponseMaxTime: sWaitForResponseMaxTime
+							}
+							
+							return makeHttpRequest(oRequestConfig);																			
+						})
+						.then(response => {
+							if (response) {		
+								resolve(response);
+							}
+							
+							reject(false);
+						})
+						.catch(responseError => {
+							if (responseError && responseError.responseText) {
+								console.error(responseError.responseText);
+							}
+
+							console.error('');
+							reject(false);
+						})
+					} catch (error) {
+						console.error('');
+						reject(false);
+					}
+				});
+			},
+
+			setApiConfigModel: function () {
+				var _this = this;
+
+				try {
+					_this.getApiConfigModel()
+					.then(oModelApiConfig => {
+						_this.getView().setModel(oModelApiConfig, 'oModelApiConfig');
+					})
+				} catch (error) {
+					console.error('Error during api config model setup');
+				}
 			},
 
 			setCityModel: function () {
+				var _this = this;
+
+				try {
+					_this.getCityModel()
+					.then(oModel => {
+						_this.getView().setModel(oModel, 'oModelCity');
+					})
+				} catch (error) {
+					console.error('Error during city model setup');
+				}
+			},
+
+			setWeatherForecastModel: function (oWeatherForecastData) {
+				var _this = this;
+
+				try {
+					var oWeaatherFormatted 	= _this.formatWeatherApiResponse(oWeatherForecastData);
+					var oModel 				= new JSONModel(oWeaatherFormatted);
+					
+					_this.getView().setModel(oModel, 'oModelWeaatherFormatted');
+					_this.setWheatherOverview();
+
+				} catch (error) {
+					console.error('Error during weather forecast model setup');
+				}
+			},
+
+			formatWeatherApiResponse: function (oWeatherForecastData) {
+				var _this = this;
+
+				if (oWeatherForecastData) {
+					try {						
+						var sMetricSymbol 	= _this.getView().getModel('oModelApiConfig').getData().units == 'metric' ? '°C' : '' || false;
+						var sCurrentDate 	= _this.getCurrentDateYYYYMMDD();						
+						
+						var aModelForecast 	= {
+							aFirstWeatherOutput: [],
+							oCityInfo: {
+								sCityName: oWeatherForecastData.city.name,
+								sCountry: oWeatherForecastData.city.country,								
+							}
+						};
+
+						var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+						
+
+						var aFirstWeatherForecast	= oWeatherForecastData.list.filter(oForecast => {
+							var sForecastDate 	= oForecast.dt_txt.substring(0, 10);
+							var sForecastTime 	= oForecast.dt_txt.slice(-8);				
+							var d 				= new Date(sForecastDate);
+							
+							oForecast.sDayName = days[d.getDay()];
+
+							if (sForecastTime == "06:00:00") {
+								return oForecast;
+							}
+						});
+
+						
+
+						aFirstWeatherForecast.forEach(oForecast => {						
+							var oWeatherApiInfo = {
+								sTemperature: Math.round(oForecast.main.temp) + sMetricSymbol,
+								sTemperatureNumber: Math.round(oForecast.main.temp),
+								sMinTemperature: Math.round(oForecast.main.temp_min),
+								sMaxTemperature: Math.round(oForecast.main.temp_max),
+								sFeelsLike: oForecast.main.feels_like,
+								sHumidity: oForecast.main.humidity,
+								sPressure: oForecast.main.pressure,
+								sIcon: `https://openweathermap.org/img/wn/${oForecast.weather[0].icon}@2x.png` ,
+								sDesc: oForecast.weather[0].main,  
+								sDesc2: oForecast.weather[0].description, 
+								sDate: _this.formatDateUtc(oForecast.dt),
+								sDayName: oForecast.sDayName,
+							}	
+
+							aModelForecast.aFirstWeatherOutput.push(oWeatherApiInfo);						
+						});			
+	
+						return aModelForecast;
+					} catch (error) {
+						console.error('Error during weather forecast model setup');
+					}
+				}				
+			},
+
+			onPressSearch: function (event) {
+				var sCityName = event.getSource().getValue();
+
+				this.getWeatherForecast(sCityName)
+				.then(response => {
+					this.setWeatherForecastModel(response);
+				})
+			},
+
+			formatDateUtc: function (sUtcDate) {
+				var data = new Date(sUtcDate * 1000),
+				dia  = data.getDate().toString(),
+				diaF = (dia.length == 1) ? '0'+dia : dia,
+				mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
+				mesF = (mes.length == 1) ? '0'+mes : mes,
+				anoF = data.getFullYear();
+				
+				return diaF+"/"+mesF+"/"+anoF;
+			},
+
+			getCurrentDateYYYYMMDD: function (sUtcDate) {
+				var d = new Date(),
+				month = '' + (d.getMonth() + 1),
+				day = '' + d.getDate(),
+				year = d.getFullYear();
+
+				if (month.length < 2) 
+					month = '0' + month;
+				if (day.length < 2) 
+					day = '0' + day;
+
+				return [year, month, day].join('-');
+			},
+
+			setWheatherOverview: function () {
+				debugger //oModelWeaatherFormatted
+
+				var aWeatherForecast = this.getView().getModel('oModelWeaatherFormatted').getData().aFirstWeatherOutput;
+
+				var m1 = aWeatherForecast[0].sTemperatureNumber;
+				var m2 = aWeatherForecast[1].sTemperatureNumber;
+				var m3 = aWeatherForecast[2].sTemperatureNumber;
+				var m4 = aWeatherForecast[3].sTemperatureNumber;
+				var m5 = aWeatherForecast[4].sTemperatureNumber;
+
+				var oWeekChartModel = {
+					"lines": [
+					  {
+						"points": [
+						  {"x": 0, "y": m1}, 	//{"x": 0, "y": M1},
+						  {"x": m1, "y": m2 > m1 ? m2 : m1}, 	//{"x": M2, "y": M3},
+						  {"x": m2 > m1 ? m2 : m1, "y": m3 > m2 ? m3 : m2}, 	//{"x": M3, "y": M4},
+						  {"x": m3 > m2 ? m3 : m2, "y": m4 > m3 ? m4 : m3}, 	//{"x": M4, "y": M5},
+						  {"x": m4 > m3 ? m4 : m3, "y": m5 > m4 ? m5 : m4}, 	//{"x": M4, "y": M5},
+						]
+					  }
+					],
+					"size": "Responsive",
+					"threshold": 40,
+					"chartTwoColors": {
+						"showPoints": true,
+						"color": {"above": "Good", "below": "Error"}
+					},
+					"chartNoThreshold": {
+						"threshold": null,
+						"showPoints": true,
+						"color": {"above": "Good", "below": "Critical"}
+					}
+				}
+
+				var oModel = new JSONModel(oWeekChartModel);
+				this.getView().setModel(oModel);
+			},
+
+			onChangeTheme: function (event) {
+				var sStatusButton = event.getSource().getState();
+
+				if (sStatusButton) {
+					sap.ui.getCore().applyTheme("sap_fiori_3_dark");
+				} else {
+					sap.ui.getCore().applyTheme("sap_fiori_3");
+				}
 				
 			},
+			
+			
 			
 			checkCityName: function () {
 				
@@ -209,10 +408,6 @@ sap.ui.define([
 			},
 
 			setTilesModel: function () {
-				
-			},
-
-			getWeatherForecast: function () {
 				
 			},
 
@@ -250,56 +445,7 @@ sap.ui.define([
 			},
 
 
-
-
-
-
-
-			teste: function () {
-				var teste = 1 + 2;
-			},
-
-			setupModel: function () {
-				var _this = this,
-					oRequestParameter = {
-						sCityName: 'são paulo'
-					}
-
-				//_this.execApiRequestCurrentWeather(oRequestParameter);
-
-				var oWeekChartModel = {
-					"lines": [
-					  {
-						"points": [
-						  {"x": 0, "y": 35},
-						  {"x": 20, "y": 53},
-						  {"x": 40, "y": 10},
-						  {"x": 60, "y": 30},
-						  {"x": 80, "y": 52},
-						  {"x": 100, "y": 73}
-						]
-					  }
-					],
-					"size": "Responsive",
-					"threshold": 40,
-					"chartTwoColors": {
-						"showPoints": true,
-						"color": {"above": "Good", "below": "Error"}
-					},
-					"chartNoThreshold": {
-						"threshold": null,
-						"showPoints": true,
-						"color": {"above": "Good", "below": "Critical"}
-					},
-
-					
-				}
-				
-
-				var sPath = jQuery.sap.getModulePath("sap.suite.ui.microchart.sample.LineMicroChartGenericTile", "/SampleData.json");
-				var oModel = new JSONModel(oWeekChartModel);
-				this.getView().setModel(oModel);
-			},
+			
 
 			execApiRequestCurrentWeather: function (oRequestParameter) {
 				var _this 	= this,
