@@ -8,10 +8,292 @@ sap.ui.define([
 
 		return Controller.extend("fioriweatherapp.controller.View1", {
 			onInit: function () {
-				//var _this = this;
+				var _this = this;
 
-				this.setApiConfigModel()
-				this.setCityModel();
+				_this.startupApp();
+			},
+
+			startupApp: function name() {
+				var _this = this;
+
+				try {
+					_this.hideShowControl('idMainConteiner', false);
+					_this.hideShowControl('idInputCity', false);					
+
+					_this.getApiConfigModel()
+					.then(oModelApiConfig => {
+						if (oModelApiConfig.getData()) { 
+							_this.setUpModel(oModelApiConfig, 'oModelApiConfig');
+
+							return _this.checkApiKey()
+						} else {
+							console.error('Error configuration not loaded');
+
+							throw "Error configuration not loaded";;
+						}
+					})
+					.then(sStatusApiKeyCheck => {
+						if (sStatusApiKeyCheck) {
+							return _this.checkServiceAvailability()
+						} else {
+							console.error('Error API Key check');
+
+							throw "Error API Key check";
+						}
+					})
+					.then(sStatusServiceCheck => {
+						if (sStatusServiceCheck) {
+							_this.hideShowControl('idInputCity', true);
+
+							return _this.getCityModel()
+						} else {
+							console.error('Error service check');
+
+							throw "Error service check";
+						}
+					})
+					.then(oModelCity => {
+						if (oModelCity.getData()) { 
+							_this.setUpModel(oModelCity, 'oModelCity');
+
+							return _this.checkApiKey()
+						} else {
+							console.error('Error configuration not loaded');
+
+							throw "Error configuration not loaded";
+						}
+					})
+					.catch(error => {
+						console.error('Error during App Inicialization');
+						console.error(error);		
+						
+						MessageBox.error('Error during App Inicialization');
+					})
+				} catch (error) {
+					console.error('Error during App Inicialization');
+					console.error(error);		
+
+					MessageBox.error('Error during App Inicialization');
+				}		
+			},
+
+			hideShowControl: function (sIdContainer, sAction) {
+				var oView = this;
+
+				var sControl = oView.byId(sIdContainer)
+				
+				if (sAction) {
+					sControl.setVisible(true)
+				} else {
+					sControl.setVisible(false)
+				}
+			},
+
+			getApiConfigModel: function () {
+				var sApiKeyFound 	= false;
+				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/config/openweathermap.json"); 
+				var oModel 			= new JSONModel(sFilePath);
+
+				return new Promise(function(resolve, reject) {
+					try {
+						oModel.attachRequestCompleted(function(event) {
+							if (event.getSource().getData()) {
+								resolve(oModel);
+							}
+
+							reject(sApiKeyFound);							
+						});
+					} catch (error) {
+						console.error('Error during the API Key search');
+						reject(sApiKeyFound);
+					}
+				});
+			},
+
+			checkApiKey: function (sWaitForResponseMaxTime) {
+				var getApiConfigModel 	= this.getApiConfigModel;
+				var makeHttpRequest 	= this.makeHttpRequest;
+				var sApiKeyIsValid 		= false;
+
+				return new Promise(function(resolve, reject) {
+					try {
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
+								sMethod: "POST", 
+								sWaitForResponseMaxTime: sWaitForResponseMaxTime
+							}
+							
+							return makeHttpRequest(oRequestConfig);																			
+						})
+						.then(response => {
+							if (response) {								
+								sApiKeyIsValid = true;
+							}
+							
+							resolve(sApiKeyIsValid);
+						})
+						.catch(responseError => {
+							if (responseError && responseError.responseText) {
+								MessageBox.error(responseError.responseText);
+
+								console.error(responseError.responseText);
+							}
+
+							console.error('Error during the API Key check');
+							reject(sApiKeyIsValid);
+						})
+					} catch (error) {
+						console.error('Error during the API Key check');
+						reject(sApiKeyIsValid);
+					}
+				});
+			},
+
+			checkServiceAvailability: function (sWaitForResponseMaxTime) {
+				var getApiConfigModel 			= this.getApiConfigModel;
+				var makeHttpRequest 			= this.makeHttpRequest;
+				var showErrorCaseByStatusCode 	= this.showErrorCaseByStatusCode;				
+				var sServiceIsAvailable 		= false;
+
+				return new Promise(function(resolve, reject) {
+					try {
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
+								sMethod: "POST", 
+								sWaitForResponseMaxTime: sWaitForResponseMaxTime
+							}
+							
+							return makeHttpRequest(oRequestConfig);																			
+						})
+						.then(response => {
+							if (response) {								
+								sServiceIsAvailable = true;
+							}
+													
+							resolve(sServiceIsAvailable);
+						})
+						.catch(responseError => {
+							if (responseError && responseError.status) {
+								showErrorCaseByStatusCode(responseError.status);								
+							}	
+
+							reject(sServiceIsAvailable);	
+						})						
+					} catch (error) {
+						console.error('Error during service availability check');
+						reject(sServiceIsAvailable);
+					}
+				});
+			},
+
+			getCityModel: function () {	
+				var sDataIsLoaded	= false;
+				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/model/city.list.br.json"); 
+				var oModel 			= new JSONModel(sFilePath);
+
+				return new Promise(function(resolve, reject) {
+					try {
+						oModel.attachRequestCompleted(function(event) {
+							if (event.getSource().getData() && event.getSource().getData().length > 0) {
+								resolve(oModel);
+							}
+
+							reject(sDataIsLoaded);							
+						});
+					} catch (error) {
+						console.error('Error during the API Key search');
+						reject(sDataIsLoaded);
+					}
+				});
+			},
+
+			searchCityWeatherForecast: function (event) {
+				var _this 		= this;
+				var sCityName 	= event.getSource().getValue();
+
+				_this.hideShowControl('idMainConteiner', false);
+
+				_this.getWeatherForecast(sCityName)
+				.then(response => {
+					_this.setWeatherForecastModel(response);
+					
+					_this.hideShowControl('idMainConteiner', true);
+				})
+				.catch(error => {
+					console.error('Erro weather search');
+					console.error(error);
+				})
+			},
+
+			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {				
+				var getApiConfigModel 	= this.getApiConfigModel;
+				var makeHttpRequest 		= this.makeHttpRequest;
+
+				return new Promise(function(resolve, reject) {
+					try {
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/${oApiConfig.apiService}?q=${sCityName}&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
+								sMethod: "POST", 
+								sWaitForResponseMaxTime: sWaitForResponseMaxTime
+							}
+							
+							return makeHttpRequest(oRequestConfig);																			
+						})
+						.then(response => {
+							if (response) {		
+								resolve(response);
+							}
+							
+							reject(false);
+						})
+						.catch(responseError => {
+							if (responseError && responseError.responseText) {
+								MessageBox.error(responseError.responseText);
+								console.error(responseError.responseText);
+							}
+
+							console.error('');
+							reject(false);
+						})
+					} catch (error) {
+						console.error('');
+						reject(false);
+					}
+				});
+			},
+
+			setWeatherForecastModel: function (oWeatherForecastData) {
+				var _this = this;
+
+				try {
+					var oWeaatherFormatted 	= _this.formatWeatherApiResponse(oWeatherForecastData);
+					var oModel 				= new JSONModel(oWeaatherFormatted);
+					
+					_this.getView().setModel(oModel, 'oModelWeaatherFormatted');
+					_this.setWheatherOverview();
+
+				} catch (error) {
+					console.error('Error during weather forecast model setup');
+				}
+			},
+
+			changeTheme: function (event) {
+				var sStatusButton = event.getSource().getState();
+
+				if (sStatusButton) {
+					sap.ui.getCore().applyTheme("sap_fiori_3_dark");
+				} else {
+					sap.ui.getCore().applyTheme("sap_fiori_3");
+				}
 			},
 
 			makeHttpRequest: function (oRequestConfig) {
@@ -51,205 +333,13 @@ sap.ui.define([
 				});
 			},
 
-			getApiConfigModel: function () {
-				var sApiKeyFound 	= false;
-				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/config/openweathermap.json"); 
-				var oModel 			= new JSONModel(sFilePath);
-
-				return new Promise(function(resolve, reject) {
-					try {
-						oModel.attachRequestCompleted(function(event) {
-							if (event.getSource().getData()) {
-								resolve(oModel);
-							}
-
-							reject(sApiKeyFound);							
-						});
-					} catch (error) {
-						console.error('Error during the API Key search');
-						reject(sApiKeyFound);
-					}
-				});
-			},
-
-			checkServiceAvailability: function (sWaitForResponseMaxTime) {
-				var getApiConfigModel 		= this.getApiConfigModel;
-				var makeHttpRequest 			= this.makeHttpRequest;
-				var showErrorCaseByStatusCode 	= this.showErrorCaseByStatusCode;				
-				var sServiceIsAvailable 		= false;
-
-				return new Promise(function(resolve, reject) {
-					try {
-						getApiConfigModel()
-						.then(oModel => {
-							var oApiConfig		= oModel.getData();
-							var oRequestConfig 	= {
-								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-								sMethod: "POST", 
-								sWaitForResponseMaxTime: sWaitForResponseMaxTime
-							}
-							
-							return makeHttpRequest(oRequestConfig);																			
-						})
-						.then(response => {
-							if (response) {								
-								sServiceIsAvailable = true;
-							}
-													
-							resolve(sServiceIsAvailable);
-						})
-						.catch(responseError => {
-							if (responseError && responseError.status) {
-								showErrorCaseByStatusCode(responseError.status);								
-							}	
-
-							reject(sServiceIsAvailable);	
-						})						
-					} catch (error) {
-						console.error('Error during service availability check');
-						reject(sServiceIsAvailable);
-					}
-				});
-			},
-
-			checkApiKey: function (sWaitForResponseMaxTime) {
-				var getApiConfigModel 	= this.getApiConfigModel;
-				var makeHttpRequest 		= this.makeHttpRequest;
-				var sApiKeyIsValid 			= false;
-
-				return new Promise(function(resolve, reject) {
-					try {
-						getApiConfigModel()
-						.then(oModel => {
-							var oApiConfig		= oModel.getData();
-							var oRequestConfig 	= {
-								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-								sMethod: "POST", 
-								sWaitForResponseMaxTime: sWaitForResponseMaxTime
-							}
-							
-							return makeHttpRequest(oRequestConfig);																			
-						})
-						.then(response => {
-							if (response) {								
-								sApiKeyIsValid = true;
-							}
-							
-							resolve(sApiKeyIsValid);
-						})
-						.catch(responseError => {
-							if (responseError && responseError.responseText) {
-								console.error(responseError.responseText);
-							}
-
-							console.error('Error during the API Key check');
-							reject(sApiKeyIsValid);
-						})
-					} catch (error) {
-						console.error('Error during the API Key check');
-						reject(sApiKeyIsValid);
-					}
-				});
-			},
-
-			getCityModel: function () {	
-				var sDataIsLoaded	= false;
-				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/model/city.list.br.json"); 
-				var oModel 			= new JSONModel(sFilePath);
-
-				return new Promise(function(resolve, reject) {
-					try {
-						oModel.attachRequestCompleted(function(event) {
-							if (event.getSource().getData() && event.getSource().getData().length > 0) {
-								resolve(oModel);
-							}
-
-							reject(sDataIsLoaded);							
-						});
-					} catch (error) {
-						console.error('Error during the API Key search');
-						reject(sDataIsLoaded);
-					}
-				});
-			},
-
-			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {				
-				var getApiConfigModel 	= this.getApiConfigModel;
-				var makeHttpRequest 		= this.makeHttpRequest;
-
-				return new Promise(function(resolve, reject) {
-					try {
-						getApiConfigModel()
-						.then(oModel => {
-							var oApiConfig		= oModel.getData();
-							var oRequestConfig 	= {
-								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/${oApiConfig.apiService}?q=${sCityName}&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-								sMethod: "POST", 
-								sWaitForResponseMaxTime: sWaitForResponseMaxTime
-							}
-							
-							return makeHttpRequest(oRequestConfig);																			
-						})
-						.then(response => {
-							if (response) {		
-								resolve(response);
-							}
-							
-							reject(false);
-						})
-						.catch(responseError => {
-							if (responseError && responseError.responseText) {
-								console.error(responseError.responseText);
-							}
-
-							console.error('');
-							reject(false);
-						})
-					} catch (error) {
-						console.error('');
-						reject(false);
-					}
-				});
-			},
-
-			setApiConfigModel: function () {
+			setUpModel:  function (oModel, sModelAlias) {
 				var _this = this;
 
 				try {
-					_this.getApiConfigModel()
-					.then(oModelApiConfig => {
-						_this.getView().setModel(oModelApiConfig, 'oModelApiConfig');
-					})
+					_this.getView().setModel(oModel, sModelAlias);
 				} catch (error) {
-					console.error('Error during api config model setup');
-				}
-			},
-
-			setCityModel: function () {
-				var _this = this;
-
-				try {
-					_this.getCityModel()
-					.then(oModel => {
-						_this.getView().setModel(oModel, 'oModelCity');
-					})
-				} catch (error) {
-					console.error('Error during city model setup');
-				}
-			},
-
-			setWeatherForecastModel: function (oWeatherForecastData) {
-				var _this = this;
-
-				try {
-					var oWeaatherFormatted 	= _this.formatWeatherApiResponse(oWeatherForecastData);
-					var oModel 				= new JSONModel(oWeaatherFormatted);
-					
-					_this.getView().setModel(oModel, 'oModelWeaatherFormatted');
-					_this.setWheatherOverview();
-
-				} catch (error) {
-					console.error('Error during weather forecast model setup');
+					console.error('Error during model setup');
 				}
 			},
 
@@ -268,15 +358,11 @@ sap.ui.define([
 								sCountry: oWeatherForecastData.city.country,								
 							}
 						};
-
-						var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 						
 						var aFirstWeatherForecast	= oWeatherForecastData.list.filter(oForecast => {
-							var sForecastDate 	= oForecast.dt_txt.substring(0, 10);
-							var sForecastTime 	= oForecast.dt_txt.slice(-8);				
-							var d 				= new Date(sForecastDate);
+							var sForecastTime = oForecast.dt_txt.slice(-8);				
 							
-							oForecast.sDayName = days[d.getDay()];
+							oForecast.sDayName = _this.getDayNameFromDate(oForecast.dt_txt.substring(0, 10));
 
 							if (sForecastTime == "06:00:00") {
 								return oForecast;
@@ -307,40 +393,41 @@ sap.ui.define([
 						console.error('Error during weather forecast model setup');
 					}
 				}				
-			},
-
-			onPressSearch: function (event) {
-				var sCityName = event.getSource().getValue();
-
-				this.getWeatherForecast(sCityName)
-				.then(response => {
-					this.setWeatherForecastModel(response);
-				})
+			},	
+			
+			getDayNameFromDate: function (sDate) {
+				var d 	 = new Date(sDate);
+				var aDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+							
+				return aDay[d.getDay()];
 			},
 
 			formatDateUtc: function (sUtcDate) {
-				var data = new Date(sUtcDate * 1000),
-				dia  = data.getDate().toString(),
-				diaF = (dia.length == 1) ? '0'+dia : dia,
-				mes  = (data.getMonth()+1).toString(), //+1 pois no getMonth Janeiro começa com zero.
-				mesF = (mes.length == 1) ? '0'+mes : mes,
-				anoF = data.getFullYear();
+				var d 		= new Date(sUtcDate * 1000),
+					sDay  	= d.getDate().toString(),
+					sDayF 	= (sDay.length == 1) ? '0' + sDay : sDay,
+					sMonth  = (d.getMonth() + 1).toString(),
+					sMonthF = (sMonth.length == 1) ? '0' + sMonth : sMonth,
+					sYearF 	= d.getFullYear();
 				
-				return diaF+"/"+mesF+"/"+anoF;
+				return sDayF + "/" + sMonthF + "/" + sYearF;
 			},
 
-			getCurrentDateYYYYMMDD: function (sUtcDate) {
-				var d = new Date(),
-				month = '' + (d.getMonth() + 1),
-				day = '' + d.getDate(),
-				year = d.getFullYear();
+			getCurrentDateYYYYMMDD: function () {
+				var d 		= new Date(),
+					sMonth 	= '' + (d.getMonth() + 1),
+					sDay 	= '' + d.getDate(),
+					sYear 	= d.getFullYear();
 
-				if (month.length < 2) 
-					month = '0' + month;
-				if (day.length < 2) 
-					day = '0' + day;
+				if (sMonth.length < 2) {
+					sMonth = '0' + sMonth;
+				}
+					
+				if (sDay.length < 2) {
+					sDay = '0' + day;
+				}					
 
-				return [year, month, day].join('-');
+				return [sYear, sMonth, sDay].join('-');
 			},
 
 			setWheatherOverview: function () {
@@ -380,17 +467,6 @@ sap.ui.define([
 				var oModel = new JSONModel(oWeekChartModel);
 				this.getView().setModel(oModel);
 			},
-
-			onChangeTheme: function (event) {
-				var sStatusButton = event.getSource().getState();
-
-				if (sStatusButton) {
-					sap.ui.getCore().applyTheme("sap_fiori_3_dark");
-				} else {
-					sap.ui.getCore().applyTheme("sap_fiori_3");
-				}
-				
-			},
 			
 			showErrorCaseByStatusCode: function (status) {
 				switch (status) {
@@ -415,19 +491,6 @@ sap.ui.define([
 							console.error('You specify wrong city name, ZIP-code or city ID.');
 						break;		
 				}
-			},
-
-			checkCityName: function () {
-				
-			},
-
-			handleWeatherForecastFailer: function () {
-				
-			},
-
-			handleWeatherForecastExeption: function () {
-				
-			},
-			
+			}
 		});
 	});
