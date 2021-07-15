@@ -15,7 +15,7 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 ## How to use
 
 ### API Configuration
-- Go to the 'file fioriweatherapp\webapp\config\openweathermap.json' 
+- Go to the file located at **fioriweatherapp\webapp\config\openweathermap.json** 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough)
 
 
@@ -71,13 +71,13 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ### How to deploy the app
 
 #### Option 1 - Generic Web Hosting:
-Host the content of the **webapp folder** by exposing the index like at the **public_html** folder of the server.
+  Host the content of the **webapp folder** by exposing the index like at the **public_html** folder of the server.
 
 #### Option 2 - Docker Hosting:
-Deploy the Docker image in the server.
+  Deploy the Docker image in the server.
 
 #### Option 3 - Deploy the app on the SAP Netweaver AS as an BSP Application:
-Import the content of the **webapp folder** to the SAP Netweaver AS using the **/ui5/ui5_repository_load** ABAP report program.
+  Import the content of the **webapp folder** to the SAP Netweaver AS using the **/ui5/ui5_repository_load** ABAP report program.
 
 ### Autor
 
