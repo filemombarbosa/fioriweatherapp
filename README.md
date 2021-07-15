@@ -19,7 +19,7 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 - Go to the 'file fioriweatherapp\webapp\config\openweathermap.json' 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough)
 
-### Run locally:
+### How run locally:
 **Prerequisites to run locally**
 - Nodejs
 
@@ -41,7 +41,7 @@ http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
 --
 
-### Run in Docker:
+### How run in Docker:
 **Prerequisites to run in Docker**
 - Docker environment installed (https://docs.docker.com/get-started/)
 
