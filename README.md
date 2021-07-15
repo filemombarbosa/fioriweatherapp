@@ -52,12 +52,13 @@ http://localhost:[PORT NUMBER]/index.html
 
 ```bash
 $ docker run filemombarbosa/latest
-``` -->
+``` 
 
 Open the URL shown in the console:
 ```bash
 http://localhost:9091/index.html
 ```
+-->
 
 ### How run the Unit Tests 
 Run the following command in your console:
