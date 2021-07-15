@@ -39,6 +39,12 @@ Open the URL shown in the console:
 ```bash
 http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
+--
+
+### Run in Docker:
+**Prerequisites to run in Docker**
+- Docker environment installed (https://docs.docker.com/get-started/)
+
 
 ### How run the Unit Tests 
 Run the following command in your console:
@@ -52,11 +58,6 @@ http://localhost:9091/test/unit/unitTests.qunit.html
 #or 
 http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ```
-
-### Run in Docker:
-**Prerequisites to run in Docker**
-- Docker environment installed (https://docs.docker.com/get-started/)
-
 
 ### How to deploy the app
 
