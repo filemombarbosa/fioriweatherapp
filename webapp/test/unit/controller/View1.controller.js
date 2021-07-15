@@ -92,6 +92,21 @@ sap.ui.define([
 				done();
 			});
 		});
+
+		QUnit.test("It should get the config model", function (assert) {
+			var done 		= assert.async();
+			var oController = new Controller();
+
+			oController.getApiConfigModel()
+			.then(result => {
+				assert.ok(result);
+				done();
+			})
+			.catch(function(err) {
+				console.error('Error found in get the config model');
+				done();
+			});
+		});
 		
 		QUnit.test("It should get the city model", function (assert) {
 			var done 		= assert.async();
@@ -122,11 +137,17 @@ sap.ui.define([
 				done();
 			});
 		});
-		
+
 		QUnit.test("It should convert UTC time to dd/mm/yyyy format", function (assert) {
 			var oController = new Controller();
 			var result = oController.formatDateUtc(1626317953);
 			assert.equal(result, '14/07/2021');
 		});
 
+		QUnit.test("It should return the day for a given date", function (assert) {
+			var oController = new Controller();
+			var result = oController.getDayNameFromDate('2021-07-14');
+			assert.equal(result, 'Wednesday');
+		});
+		
 });
