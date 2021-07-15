@@ -46,6 +46,14 @@ http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 **Prerequisites to run in Docker**
 - Docker environment installed (https://docs.docker.com/get-started/)
 
+```bash
+$ docker run filemombarbosa/latest
+```
+
+Open the URL shown in the console:
+```bash
+http://localhost:9091/index.html
+```
 
 ### How run the Unit Tests 
 Run the following command in your console:
