@@ -22,23 +22,24 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 
 ### How run locally:
 **Prerequisites to run locally**
-- Nodejs Installed.
+- Git.
+- Nodejs.
 
 Run the following commands in your console:
 ```bash
 # Download the App from the Repository
-$ git clone https://github.com/filemombarbosa/fioriweatherapp.git
+git clone https://github.com/filemombarbosa/fioriweatherapp.git
 
 # Start the App at port 9190
-$ npm start #Or node server.js
+npm start 
 
-# Start the App at any port you prefer
-$ PORT=[PORT NUMBER] npm start #Or PORT=[PORT NUMBER] node server.js
+# Start the App at any port of your choice
+PORT=[PORT NUMBER] npm start
 ```
 
 Open the URL shown in the console:
 ```bash
-http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
+http://localhost:[PORT NUMBER]/index.html 
 ```
 
 <!-- ### How run in Docker:
@@ -58,7 +59,7 @@ http://localhost:9091/index.html
 Run the following command in your console:
 ```bash
 # Get the url of the Unit Tests runner
-$ npm test
+npm test
 ```
 Open the URL shown in the console:
 ```bash
