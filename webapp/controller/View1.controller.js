@@ -217,18 +217,24 @@ sap.ui.define([
 				var _this 		= this;
 				var sCityName 	= event.getSource().getValue();
 
-				_this.hideShowControl('idMainConteiner', false);
+				if (sCityName) {
+					_this.hideShowControl('idMainConteiner', false);
 
-				_this.getWeatherForecast(sCityName)
-				.then(response => {
-					_this.setWeatherForecastModel(response);
-					
-					_this.hideShowControl('idMainConteiner', true);
-				})
-				.catch(error => {
-					console.error('Erro weather search');
-					console.error(error);
-				})
+					_this.getWeatherForecast(sCityName)
+					.then(response => {
+						_this.setWeatherForecastModel(response);
+						
+						_this.hideShowControl('idMainConteiner', true);
+					})
+					.catch(error => {
+						console.error('Erro weather search');
+						console.error(error);
+
+						MessageBox.error('Erro during the weather forecast search. Make sure the city name is correct');
+					})
+				} else {
+					MessageBox.warning('Please enter the city name');
+				}
 			},
 
 			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {				
@@ -281,7 +287,7 @@ sap.ui.define([
 					_this.getView().setModel(oModel, 'oModelWeaatherFormatted');
 					_this.setWheatherOverview();
 
-				} catch (error) {
+				} catch (error) {				
 					console.error('Error during weather forecast model setup');
 				}
 			},

@@ -17,8 +17,8 @@
 				<headerContent>
 					<ToolbarSpacer/>
 					<HBox>
-						<Label text="Dark mode" />
-						<Switch change=".onChangeTheme" state="false" customTextOn="ON" customTextOff="OFF">
+						<Label text="{i18n>darkMode}" />
+						<Switch change=".changeTheme" state="false" customTextOn="{i18n>on}" customTextOff="{i18n>off}">
 							<layoutData>
 								<FlexItemData growFactor="1" />
 							</layoutData>
@@ -40,7 +40,7 @@
 									valueHelpIconSrc="sap-icon://sys-find"
 									placeholder="Enter the city name"
 									suggestionItems="{oModelCity>/}"
-									valueHelpRequest=".onPressSearch"
+									valueHelpRequest=".searchCityWeatherForecast"
 								>
 									<suggestionItems>
 										<core:Item text="{oModelCity>city}" />
