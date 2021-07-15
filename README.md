@@ -74,7 +74,7 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ### How to deploy the app
 
 #### Option 1 - Generic Web Hosting:
-  Host the content of the **webapp folder** by exposing the index like at the **public_html** folder of the server.
+  Host the content of the **webapp folder** by exposing it at the **public_html** folder of the Web Server.
 
 <!-- #### Option 2 - Docker Hosting:
   Deploy the Docker image in the server. -->
