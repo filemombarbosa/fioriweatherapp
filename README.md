@@ -17,6 +17,10 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 **Prerequisites to run locally**
 - Nodejs
 
+### API Configuration
+- Go to the 'file fioriweatherapp\webapp\config\openweathermap.json' 
+- Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough)
+
 Run the following commands in your console:
 ```bash
 # Download the App from the Repository
@@ -49,6 +53,12 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 
 ### How to deploy the app
 
+#### Option 1 - Generic webhosting:
+Host the content of the webapp folder by exposing the index like at the public_html folder of the server in any Webserver like Hostgator, Heroku etc.
+
+#### Option 2 - Generic docker hosting:
+
+#### Option 3 - Deploy on the SAP Netweaver as an BSP Application:
 
 
 ### Autor
@@ -58,8 +68,6 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
  <br />
  <sub><b>Filemom Barbosa</b></sub></a> <a href="https://github.com/filemombarbosa title="Github">🚀</a>
 
-
-Developed with ❤️ & 📚 by Filemom Barbosa 🙌
 
 [![Sap Badge](https://img.shields.io/badge/-@filemombarbosa-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/filemombarbosa)](https://people.sap.com/filemombarbosa) 
 [![Linkedin Badge](https://img.shields.io/badge/-Filemom-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filemombarbosa/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
