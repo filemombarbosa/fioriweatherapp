@@ -14,12 +14,14 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 
 ## How to use
 ### How to setup the development environment
-**Prerequisites to run locally**
-- Nodejs
 
 ### API Configuration
 - Go to the 'file fioriweatherapp\webapp\config\openweathermap.json' 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough)
+
+**Prerequisites to run locally**
+- Nodejs
+
 
 Run the following commands in your console:
 ```bash
