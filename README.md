@@ -22,7 +22,7 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 
 ### How run locally:
 **Prerequisites to run locally**
-- Nodejs
+- Nodejs Installed
 
 Run the following commands in your console:
 ```bash
@@ -84,7 +84,6 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
  <img style="border-radius: 50%;" src="https://avatars.services.sap.com/images/filemombarbosa.png" width="100px;" alt=""/>
  <br />
  <sub><b>Filemom Barbosa</b></sub></a> <a href="https://github.com/filemombarbosa title="Github">🚀</a>
-
 
 [![Sap Badge](https://img.shields.io/badge/-@filemombarbosa-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/filemombarbosa)](https://people.sap.com/filemombarbosa) 
 [![Linkedin Badge](https://img.shields.io/badge/-Filemom-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filemombarbosa/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
