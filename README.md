@@ -62,14 +62,14 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 
 ### How to deploy the app
 
-#### Option 1 - Generic webhosting:
-Host the content of the webapp folder by exposing the index like at the public_html folder of the server in any Webserver like Hostgator, Heroku etc.
+#### Option 1 - Generic Web Hosting:
+Host the content of the **webapp folder** by exposing the index like at the **public_html** folder of the server.
 
-#### Option 2 - Generic docker hosting:
+#### Option 2 - Docker Hosting:
 Deploy the Docker image in the server.
 
-#### Option 3 - Deploy on the SAP Netweaver as an BSP Application:
-Import the content of the webapp folder using the '/ui5/ui5_repository_load' ABAP report program.
+#### Option 3 - Deploy the app on the SAP Netweaver AS as an BSP Application:
+Import the content of the **webapp folder** to the SAP Netweaver AS using the **/ui5/ui5_repository_load** ABAP report program.
 
 ### Autor
 
