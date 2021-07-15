@@ -36,9 +36,8 @@ git clone https://github.com/filemombarbosa/fioriweatherapp.git
 npm start
 ```
 
-Optional
 ```bash
-# Start the App at any port of your choice
+# Optional - Start the App at any port of your choice
 PORT=[PORT NUMBER] npm start
 ```
 
