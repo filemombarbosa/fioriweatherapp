@@ -39,7 +39,6 @@ Open the URL shown in the console:
 ```bash
 http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
---
 
 ### How run in Docker:
 **Prerequisites to run in Docker**
