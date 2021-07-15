@@ -29,10 +29,15 @@ Run the following commands in your console:
 ```bash
 # Download the App from the Repository
 git clone https://github.com/filemombarbosa/fioriweatherapp.git
+```
 
+```bash
 # Start the App at port 9190
-npm start 
+npm start
+```
 
+Optional
+```bash
 # Start the App at any port of your choice
 PORT=[PORT NUMBER] npm start
 ```
