@@ -19,7 +19,7 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 - Go to the 'file fioriweatherapp\webapp\config\openweathermap.json' 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough)
 
-## Run locally:
+### Run locally:
 **Prerequisites to run locally**
 - Nodejs
 
