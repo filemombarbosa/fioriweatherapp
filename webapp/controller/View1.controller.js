@@ -271,7 +271,6 @@ sap.ui.define([
 
 						var days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 						
-
 						var aFirstWeatherForecast	= oWeatherForecastData.list.filter(oForecast => {
 							var sForecastDate 	= oForecast.dt_txt.substring(0, 10);
 							var sForecastTime 	= oForecast.dt_txt.slice(-8);				
@@ -282,9 +281,7 @@ sap.ui.define([
 							if (sForecastTime == "06:00:00") {
 								return oForecast;
 							}
-						});
-
-						
+						});					
 
 						aFirstWeatherForecast.forEach(oForecast => {						
 							var oWeatherApiInfo = {
@@ -347,8 +344,6 @@ sap.ui.define([
 			},
 
 			setWheatherOverview: function () {
-				debugger //oModelWeaatherFormatted
-
 				var aWeatherForecast = this.getView().getModel('oModelWeaatherFormatted').getData().aFirstWeatherOutput;
 
 				var m1 = aWeatherForecast[0].sTemperatureNumber;
@@ -361,11 +356,11 @@ sap.ui.define([
 					"lines": [
 					  {
 						"points": [
-						  {"x": 0, "y": m1}, 	//{"x": 0, "y": M1},
-						  {"x": m1, "y": m2 > m1 ? m2 : m1}, 	//{"x": M2, "y": M3},
-						  {"x": m2 > m1 ? m2 : m1, "y": m3 > m2 ? m3 : m2}, 	//{"x": M3, "y": M4},
-						  {"x": m3 > m2 ? m3 : m2, "y": m4 > m3 ? m4 : m3}, 	//{"x": M4, "y": M5},
-						  {"x": m4 > m3 ? m4 : m3, "y": m5 > m4 ? m5 : m4}, 	//{"x": M4, "y": M5},
+						  {"x": 0, "y": m1}, 								//{"x": 0, "y": M1},
+						  {"x": m1, "y": m2 > m1 ? m2 : m1}, 				//{"x": M2, "y": M3},
+						  {"x": m2 > m1 ? m2 : m1, "y": m3 > m2 ? m3 : m2}, //{"x": M3, "y": M4},
+						  {"x": m3 > m2 ? m3 : m2, "y": m4 > m3 ? m4 : m3}, //{"x": M4, "y": M5},
+						  {"x": m4 > m3 ? m4 : m3, "y": m5 > m4 ? m5 : m4}, //{"x": M4, "y": M5},
 						]
 					  }
 					],
@@ -397,28 +392,6 @@ sap.ui.define([
 				
 			},
 			
-			
-			
-			checkCityName: function () {
-				
-			},
-
-			getTilesModel: function () {
-				
-			},
-
-			setTilesModel: function () {
-				
-			},
-
-			handleWeatherForecastFailer: function () {
-				
-			},
-
-			handleWeatherForecastExeption: function () {
-				
-			},
-
 			showErrorCaseByStatusCode: function (status) {
 				switch (status) {
 					case 401:
@@ -444,44 +417,17 @@ sap.ui.define([
 				}
 			},
 
+			checkCityName: function () {
+				
+			},
 
-			
+			handleWeatherForecastFailer: function () {
+				
+			},
 
-			execApiRequestCurrentWeather: function (oRequestParameter) {
-				var _this 	= this,
-					sApiKey = "918025524dd07e9ca19e2ce27158b6b8";
-
-				try {
-					fetch(`https://api.openweathermap.org/data/2.5/weather?q=${oRequestParameter.sCityName}&units=metric&APPID=${sApiKey}`)
-					.then(response => {	
-						if (!response.ok) {
-							console.error("Error in the API Response");
-						}
-
-						return response.json();		
-					})
-					.then(oResponse => {
-						if (oResponse && oResponse.cod != "404") {
-							var oWeatherApiInfo = {
-								sCityName: oResponse.name,
-								sTemperature: Math.round(oResponse.main.temp),
-								sMinTemperature: Math.round(oResponse.main.temp_min),
-								sMaxTemperature: Math.round(oResponse.main.temp_max),
-								sFeelsLike: oResponse.main.feels_like,
-								sHumidity: oResponse.main.humidity,
-								sCountry: oResponse.sys.country,
-							}
-
-							MessageBox.alert(`${oWeatherApiInfo.sCityName} (${oWeatherApiInfo.sCountry}) ${Math.round(oWeatherApiInfo.sTemperature)} °C`);
-
-							console.log(oResponse);
-						}						
-					})
-				} catch (error) {
-					console.error(error);
-				}
-			}
-
+			handleWeatherForecastExeption: function () {
+				
+			},
 			
 		});
 	});

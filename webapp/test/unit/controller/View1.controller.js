@@ -32,8 +32,6 @@ sap.ui.define([
 			'setApiConfigModel',
 			'formatDateUtc',
 
-			'getTilesModel',
-			'setTilesModel',			
 			'handleWeatherForecastFailer',
 			'handleWeatherForecastExeption',
 			'showErrorCaseByStatusCode',

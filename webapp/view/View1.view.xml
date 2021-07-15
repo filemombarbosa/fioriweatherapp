@@ -17,7 +17,7 @@
 				<headerContent>
 					<ToolbarSpacer/>
 					<HBox>
-						<Label text="Dark Mode" />
+						<Label text="Dark mode" />
 						<Switch change=".onChangeTheme" state="false" customTextOn="ON" customTextOff="OFF">
 							<layoutData>
 								<FlexItemData growFactor="1" />
