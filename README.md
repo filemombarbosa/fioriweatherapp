@@ -41,13 +41,13 @@ Open the URL shown in the console:
 http://localhost:9091/index.html or http://localhost:[PORT NUMBER]/index.html
 ```
 
-### How run in Docker:
+<!-- ### How run in Docker:
 **Prerequisites to run in Docker**
 - Docker environment installed (https://docs.docker.com/get-started/)
 
 ```bash
 $ docker run filemombarbosa/latest
-```
+``` -->
 
 Open the URL shown in the console:
 ```bash
@@ -72,8 +72,8 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 #### Option 1 - Generic Web Hosting:
   Host the content of the **webapp folder** by exposing the index like at the **public_html** folder of the server.
 
-#### Option 2 - Docker Hosting:
-  Deploy the Docker image in the server.
+<!-- #### Option 2 - Docker Hosting:
+  Deploy the Docker image in the server. -->
 
 #### Option 3 - Deploy the app on the SAP Netweaver AS as an BSP Application:
   Import the content of the **webapp folder** to the SAP Netweaver AS using the **/ui5/ui5_repository_load** ABAP report program.
