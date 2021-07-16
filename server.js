@@ -19,5 +19,5 @@ http.createServer(function (req, res) {
     return res.end();    
   });
 }).listen(portNumber,()=>{
-  //console.log(`Waiting for requests on port: ${portNumber}. The app is available at: http://localhost:${portNumber}/index.html`);
+  console.log(`Waiting for requests on port: ${portNumber}. The app is available at: http://localhost:${portNumber}/index.html`);
 });
