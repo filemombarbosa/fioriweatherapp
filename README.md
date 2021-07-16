@@ -17,10 +17,6 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 
 ### How to setup the development environment
 
-### API Configuration
-- Go to the file located at **/webapp/config/openweathermap.json** 
-- Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough).
-
 ### How run locally:
 **Prerequisites to run locally**
 - Git.
@@ -32,6 +28,9 @@ Run the following commands in your console:
 git clone https://github.com/filemombarbosa/fioriweatherapp.git
 ```
 
+**API Configuration**
+- Go to the file located at **/webapp/config/openweathermap.json** 
+- Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough).
 
 Go to the **fioriweatherapp folder** and run the following command
 ```bash
