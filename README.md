@@ -10,7 +10,7 @@
 ## Overview
 Fiori Weather App is an web application developed using SAPUI5 freestyle, which provides information about the weather for a given city. The application is designed using the TDD (Test-Driven Development) approach and others development best practices. 
 
-- **App demo page** - http://sapcodeplace.com/fioriweatherapp
+- **App demo page** - https://sapcodeplace.com/fioriweatherapp
 - **Weather API** - https://openweathermap.org
 
 ## How to use
