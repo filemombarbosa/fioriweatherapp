@@ -446,6 +446,10 @@ sap.ui.define([
 
 					oTabelaDetalhe.setModel(oModel);
 
+					_this.byId('idContainerTable').removeAllContent();
+					
+					_this.byId('idInputCity').resetProperty('value');
+
 					_this.byId('idContainerTable').addContent(oTabelaDetalhe);
 				} catch (error) {
 					console.error('Error during forecast table setup');
