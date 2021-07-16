@@ -204,26 +204,9 @@
 									<l:BlockLayoutCell id="idContainerTable" title="{i18n>weatherWeek}" />
 								</l:BlockLayoutRow>
 
-							<!-- 	<l:BlockLayoutRow>
-									<l:BlockLayoutCell title="">
-
-									</l:BlockLayoutCell>
-								</l:BlockLayoutRow> -->
-								
-								<!-- <l:BlockLayoutRow>
-									<l:BlockLayoutCell title="50% width cell">
-										<Text text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr." />
-									</l:BlockLayoutCell>
-									<l:BlockLayoutCell title="50% width cell">
-										<FeedInput showIcon="true" />
-										<FeedInput showIcon="true" />
-									</l:BlockLayoutCell>
-								</l:BlockLayoutRow> -->
-								
 							</l:BlockLayout>
 						</l:VerticalLayout>
-	
-						
+
 					</content>
 				</Page>
 			</pages>
