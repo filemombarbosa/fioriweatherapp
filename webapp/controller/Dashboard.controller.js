@@ -683,13 +683,13 @@ sap.ui.define([
 							console.error('You are using wrong API key in API request. Please, check your right API key in personal account.');
 							console.error('You have free subscription and try to get access to our paid services (for example, 16 days/daily forecast API, any historical weather data, Weather maps 2.0, etc). Please, check your tariff in your personal account and pay attention at our price and condition.');
 						break;
-					case 401:
+					case 404:
 						console.error('Error during the service check. Please check the following cases:');
 						console.group();
 							console.error('You make a wrong API request. Please, check your API request.');
 							console.error('You specify wrong city name, ZIP-code or city ID.');
 						break;	
-					case 401:
+					case 429:
 						console.error('Error during the service check. Please check the following cases:');
 						console.group();
 							console.error('You make a wrong API request. Please, check your API request.');
