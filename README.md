@@ -63,7 +63,7 @@ http://localhost:9091/index.html
 -->
 
 ### How run the Unit Tests 
-Run the following command in your console (**Run it in a new console instance/tab, the App must be running**):
+Run the following command in a new console instance (**The App must be running**):
 ```bash
 # Get the url of the Unit Tests runner
 npm test
