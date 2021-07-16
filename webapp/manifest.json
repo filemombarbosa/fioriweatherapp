@@ -32,10 +32,10 @@
   "sap.ui5": {
     "flexEnabled": false,
     "rootView": {
-      "viewName": "fioriweatherapp.view.View1",
+      "viewName": "fioriweatherapp.view.Dashboard",
       "type": "XML",
       "async": true,
-      "id": "View1"
+      "id": "Dashboard"
     },
     "dependencies": {
       "minUI5Version": "1.66.0",
@@ -86,8 +86,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": false,
-          "viewId": "View1",
-          "viewName": "View1"
+          "viewId": "Dashboard",
+          "viewName": "Dashboard"
         }
       }
     }

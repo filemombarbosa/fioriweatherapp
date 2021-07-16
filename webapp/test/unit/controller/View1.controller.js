@@ -1,11 +1,11 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"fioriweatherapp/controller/View1.controller"
+	"fioriweatherapp/controller/Dashboard.controller"
 ], function (Controller) {
 	"use strict";
 
-	QUnit.module("Unit tests for View1 Controller");
+	QUnit.module("Unit tests for Dashboard Controller");
 
 		QUnit.test("It should find all main functions", function (assert) {
 			var oController 		= new Controller();

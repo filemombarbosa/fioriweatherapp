@@ -6,7 +6,7 @@ sap.ui.define([
 	function (Controller, MessageBox, JSONModel) {
 		"use strict";
 
-		return Controller.extend("fioriweatherapp.controller.View1", {
+		return Controller.extend("fioriweatherapp.controller.Dashboard", {
 			onInit: function () {
 				var _this = this;
 
