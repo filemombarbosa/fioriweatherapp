@@ -32,7 +32,7 @@ git clone https://github.com/filemombarbosa/fioriweatherapp.git
 - Go to the file located at **/fioriweatherapp/webapp/config/openweathermap.json** 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough).
 
-Go to the **fioriweatherapp folder** and run the following command
+Run the following commands in your console at the **fioriweatherapp folder**:
 ```bash
 # Start the App at port 9190
 npm start
