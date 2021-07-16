@@ -10,7 +10,8 @@
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
-    "ach": "ach"
+    "ach": "ach",
+    "author": "Filemom Barbosa"
   },
   "sap.ui": {
     "technology": "UI5",
