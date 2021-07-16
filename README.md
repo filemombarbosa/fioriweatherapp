@@ -43,7 +43,7 @@ npm start
 PORT=[PORT NUMBER] npm start
 ```
 
-Open the URL shown in the console:
+Open the following URL in yout browser:
 ```bash
 http://localhost:[PORT NUMBER]/index.html 
 ```
