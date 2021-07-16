@@ -673,8 +673,8 @@ sap.ui.define([
 				}				
 			},
 			
-			showErrorCaseByStatusCode: function (status) {
-				switch (status) {
+			showErrorCaseByStatusCode: function (sStastusCode) {
+				switch (sStastusCode) {
 					case 401:
 						console.error('Error during the service check. Please check the following cases:');
 						console.group();
