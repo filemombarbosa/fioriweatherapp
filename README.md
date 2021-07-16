@@ -68,7 +68,7 @@ http://localhost:9091/index.html
 # Get the url of the Unit Tests runner
 npm test
 ``` -->
-Open the URL in yout browser:
+Open the following URL in yout browser:
 ```bash
 http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ```
