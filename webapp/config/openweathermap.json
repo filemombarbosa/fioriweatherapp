@@ -1,5 +1,5 @@
 {
-    "apiKey": "918025524dd07e9ca19e2ce27158b6b8",
+    "apiKey": "Enter you API key here",
     "endPoint": "https://api.openweathermap.org/data/",
     "apiService": "forecast",
     "apiVersion": "2.5",
