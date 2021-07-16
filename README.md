@@ -32,6 +32,8 @@ Run the following commands in your console:
 git clone https://github.com/filemombarbosa/fioriweatherapp.git
 ```
 
+
+Go to the **fioriweatherapp folder** and run the following command
 ```bash
 # Start the App at port 9190
 npm start
