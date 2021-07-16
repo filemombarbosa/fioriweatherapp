@@ -29,7 +29,7 @@ git clone https://github.com/filemombarbosa/fioriweatherapp.git
 ```
 
 **API Configuration**
-- Go to the file located at **/webapp/config/openweathermap.json** 
+- Go to the file located at **/fioriweatherapp/webapp/config/openweathermap.json** 
 - Enter your **API Key** or get one in case you don't have, at https://home.openweathermap.org/users/sign_up (The free one is enough).
 
 Go to the **fioriweatherapp folder** and run the following command
