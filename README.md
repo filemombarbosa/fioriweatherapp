@@ -22,7 +22,7 @@ Fiori Weather App is an web application developed using SAPUI5 freestyle, which 
 - Git.
 - Nodejs.
 
-Run the following commands in your console:
+Run the following command in your console:
 ```bash
 # Download the App from the Repository
 git clone https://github.com/filemombarbosa/fioriweatherapp.git
