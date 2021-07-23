@@ -11,6 +11,7 @@ sap.ui.define([
 			assertions: {
 
 				iShouldSeeTheApp: function () {
+					debugger
 					return this.waitFor({
 						id: "app",
 						viewName: sViewName,
@@ -19,6 +20,10 @@ sap.ui.define([
 						},
 						errorMessage: "Did not find the " + sViewName + " view"
 					});
+				},
+
+				teste: function (params) {
+					console.log('teste')
 				}
 			}
 		}

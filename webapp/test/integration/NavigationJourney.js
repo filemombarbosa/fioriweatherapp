@@ -9,8 +9,9 @@ sap.ui.define([
 	QUnit.module("Navigation Journey");
 
 	opaTest("Should see the initial page of the app", function (Given, When, Then) {
+		debugger
 		// Arrangements
-		Given.iStartMyApp();
+		//Given.iStartMyApp();
 
 		// Assertions
 		Then.onTheAppPage.iShouldSeeTheApp();

@@ -127,7 +127,7 @@ sap.ui.define([
 								var oApiConfig		= oModel.getData();
 								var oRequestConfig 	= {
 									sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-									sMethod: "POST", 
+									sMethod: "GET", 
 									sWaitForResponseMaxTime: sWaitForResponseMaxTime
 								}
 								
@@ -174,7 +174,7 @@ sap.ui.define([
 								var oApiConfig		= oModel.getData();
 								var oRequestConfig 	= {
 									sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/weather?q=London,uk&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-									sMethod: "POST", 
+									sMethod: "GET", 
 									sWaitForResponseMaxTime: sWaitForResponseMaxTime
 								}
 								
@@ -209,24 +209,22 @@ sap.ui.define([
 				var sFilePath 		= jQuery.sap.getModulePath("fioriweatherapp", "/model/city.list.br.json"); 
 				var oModel 			= new JSONModel(sFilePath);
 
-				try {
-					return new Promise(function(resolve, reject) {
-						try {
-							oModel.attachRequestCompleted(function(event) {
-								if (event.getSource().getData() && event.getSource().getData().length > 0) {
-									resolve(oModel);
-								}
-	
-								reject(sDataIsLoaded);							
-							});
-						} catch (error) {
-							console.error('Error during the API Key search');
-							reject(sDataIsLoaded);
-						}
-					});	
-				} catch (error) {
-					console.error('Error during the city model get');
-				}				
+				return new Promise(function(resolve, reject) {
+					try {
+						oModel.attachRequestCompleted(function(event) {
+
+							if (event.getSource().getData() && event.getSource().getData().length > 0) {
+								resolve(oModel);
+							}
+
+							reject(sDataIsLoaded);							
+						});
+					} catch (error) {
+						console.error('Error during the city model get');
+						reject(sDataIsLoaded);
+					}
+				});	
+							
 			},
 
 			searchCityWeatherForecast: function (event) {
@@ -245,9 +243,7 @@ sap.ui.define([
 						})
 						.catch(error => {
 							console.error('Erro weather search');
-							console.error(error);
-	
-							//MessageBox.error('Erro during the weather forecast search. Make sure the city name is correct');
+							console.error(error);	
 						})
 					} else {
 						MessageBox.warning('Please enter the city name');
@@ -257,49 +253,45 @@ sap.ui.define([
 				}
 			},
 
-			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {		
+			getWeatherForecast: function (sCityName, sWaitForResponseMaxTime) {
 				var _this 				= this;
 				var getApiConfigModel 	= _this.getApiConfigModel;
 				var makeHttpRequest 	= _this.makeHttpRequest;
 
-				try {
-					return new Promise(function(resolve, reject) {
-						try {
-							getApiConfigModel()
-							.then(oModel => {
-								var oApiConfig		= oModel.getData();
-								var oRequestConfig 	= {
-									sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/${oApiConfig.apiService}?q=${sCityName}&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
-									sMethod: "POST", 
-									sWaitForResponseMaxTime: sWaitForResponseMaxTime
-								}
-								
-								return makeHttpRequest(oRequestConfig);																			
-							})
-							.then(response => {
-								if (response) {		
-									resolve(response);
-								}
-								
-								reject(false);
-							})
-							.catch(responseError => {
-								if (responseError && responseError.responseText) {
-									MessageBox.error(responseError.responseText);
-									console.error(responseError.responseText);
-								}
-	
-								console.error('');
-								reject(false);
-							})
-						} catch (error) {
-							console.error('');
+				return new Promise(function(resolve, reject) {
+					try {
+						getApiConfigModel()
+						.then(oModel => {
+							var oApiConfig		= oModel.getData();
+							var oRequestConfig 	= {
+								sUrlEndPoint: `${oApiConfig.endPoint}/${oApiConfig.apiVersion}/${oApiConfig.apiService}?q=${sCityName}&lang=${oApiConfig.lang}&mode=${oApiConfig.mode}&units=${oApiConfig.units}&APPID=${oApiConfig.apiKey}`,
+								sMethod: "GET", 
+								sWaitForResponseMaxTime: sWaitForResponseMaxTime
+							}
+							
+							return makeHttpRequest(oRequestConfig);																			
+						})
+						.then(ApiResponse => {
+							if (ApiResponse) {		
+								resolve(ApiResponse);
+							}
+							
 							reject(false);
-						}
-					});
-				} catch (error) {
-					console.error('During weather forecast get');
-				}				
+						})
+						.catch(responseError => {
+							if (responseError && responseError.responseText) {
+								MessageBox.error(responseError.responseText);
+								console.error(responseError.responseText);
+							}
+
+							console.error('Error while getting the weather forecast');
+							reject(false);
+						})
+					} catch (error) {
+						console.error('Error while getting the weather forecast');
+						reject(false);
+					}
+				});
 			},
 
 			setWeatherForecastModel: function (oWeatherForecastData) {
@@ -330,20 +322,20 @@ sap.ui.define([
 						growingThreshold: 20,						
 						columns: [
 							new sap.m.Column({
-								width: '60px',
+								width: '50px',
 								header: new sap.m.Label({
 									text: "Day"
 								})
 							}),							
 							new sap.m.Column({
-								width: '80px',
+								width: '50px',
 								sortIndicator: sap.ui.core.SortOrder.Ascending,
 								header: new sap.m.Label({
 									text: "Date"
 								})
 							}),
 							new sap.m.Column({
-								width: '60px',
+								width: '40px',
 								sortIndicator: sap.ui.core.SortOrder.Ascending,
 								header: new sap.m.Label({
 									text: "Time"
@@ -517,13 +509,13 @@ sap.ui.define([
 						if (sForecastTime !== '00:00:00') {
 							var oTableRow = {
 								sDate: _this.formatDateUtc(oForecast.dt),
-								sTime: sForecastTime,
+								sTime: oForecast.dt_txt.slice(-8).substring(0,5),
 								sDay: _this.getDayNameFromDate(oForecast.dt_txt.substring(0, 10)),							
 								sIcon: `https://openweathermap.org/img/wn/${oForecast.weather[0].icon}@2x.png`,
 								sDesc: oForecast.weather[0].main, 
 								sTemp: Math.round(oForecast.main.temp) + sMetricSymbol,
 								sTempNumber: Math.round(oForecast.main.temp),
-								sTempMin: Math.round(oForecast.main.temp_min)  + sMetricSymbol,
+								sTempMin: Math.round(oForecast.main.temp_min) + sMetricSymbol,
 								sTempMinNumber: Math.round(oForecast.main.temp_min),
 								sTempMax: Math.round(oForecast.main.temp_max) + sMetricSymbol,	
 								sTempMaxNumber: Math.round(oForecast.main.temp_max),
@@ -533,7 +525,6 @@ sap.ui.define([
 
 							aForecastTable.push(oTableRow);
 						}
-						
 					});
 
 					return aForecastTable;
@@ -701,44 +692,40 @@ sap.ui.define([
 			makeHttpRequest: function (oRequestConfig) {
 				var _this = this;
 
-				try {
-					return new Promise(function(resolve, reject) {
-						if (oRequestConfig.sUrlEndPoint) {
-							try {
-								$.ajax({
-									url: oRequestConfig.sUrlEndPoint,
-									method: oRequestConfig.sMethod || "GET",
-									dataType: "JSON",
-									async: true,
-									timeout: oRequestConfig.sWaitForResponseMaxTime || 60000,
-									crossDomain: true,
-									processData: false,
-									contentType: false,
-									beforeSend: function () {
-										sap.ui.core.BusyIndicator.show();
-									},
-									complete: function () {
-										sap.ui.core.BusyIndicator.hide();
-									},
-									error: function (response) {
-										reject(response);
-									},
-									success: (oResponse) => {
-										resolve(oResponse);									
-									}								
-								});				
-							} catch (error) {
-								console.error('Error during the HTTP request');
-								reject(false);
-							}
-						} else {
+				return new Promise(function(resolve, reject) {
+					if (oRequestConfig.sUrlEndPoint) {
+						try {
+							$.ajax({
+								url: oRequestConfig.sUrlEndPoint,
+								method: oRequestConfig.sMethod || "GET",
+								dataType: "JSON",
+								async: true,
+								timeout: oRequestConfig.sWaitForResponseMaxTime || 60000,
+								crossDomain: true,
+								processData: false,
+								contentType: false,
+								beforeSend: function () {
+									sap.ui.core.BusyIndicator.show();
+								},
+								complete: function () {
+									sap.ui.core.BusyIndicator.hide();
+								},
+								error: function (response) {
+									reject(response);
+								},
+								success: (oResponse) => {
+									resolve(oResponse);									
+								}								
+							});				
+						} catch (error) {
 							console.error('Error during the HTTP request');
 							reject(false);
-						} 
-					});
-				} catch (error) {
-					console.error('Error during the HTTP request');
-				}
+						}
+					} else {
+						console.error('Error during the HTTP request');
+						reject(false);
+					} 
+				});
 			},
 		});
 	});
