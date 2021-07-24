@@ -14,7 +14,7 @@ Fiori Weather App is a simple web application developed by Filemom Barbosa using
 - **Weather API** - https://openweathermap.org
 
 - **OpenUI5 Version** - 1.91.0 (Build de 14.06.2021 14:45:00)
-- **compatibility** - Fiori version 3
+- **Compatibility** - Fiori version 3
 
 ## How to use
 
