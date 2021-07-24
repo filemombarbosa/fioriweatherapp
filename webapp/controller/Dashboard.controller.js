@@ -25,7 +25,7 @@ sap.ui.define([
 						if (oModelApiConfig.getData()) { 
 							_this.setUpModel(oModelApiConfig, 'oModelApiConfig');
 
-							return _this.checkApiKey()
+							return _this.checkApiKey();
 						} else {
 							console.error('Error configuration not loaded');
 
@@ -45,7 +45,7 @@ sap.ui.define([
 						if (sStatusServiceCheck) {
 							_this.hideShowControl('idInputCity', true);
 
-							return _this.getCityModel()
+							return _this.getCityModel();
 						} else {
 							console.error('Error service check');
 
@@ -56,7 +56,7 @@ sap.ui.define([
 						if (oModelCity.getData()) { 
 							_this.setUpModel(oModelCity, 'oModelCity');
 
-							return _this.checkApiKey()
+							return _this.checkApiKey();
 						} else {
 							console.error('Error configuration not loaded');
 
@@ -317,7 +317,7 @@ sap.ui.define([
 				var _this = this;
 
 				try {
-					var oTabelaDetalhe = new sap.m.Table({
+					var oTabelaWeather = new sap.m.Table({
 						growing: true,
 						growingThreshold: 20,						
 						columns: [
@@ -436,13 +436,13 @@ sap.ui.define([
 	
 					var oModel = new sap.ui.model.json.JSONModel(aForecastTable);
 
-					oTabelaDetalhe.setModel(oModel);
+					oTabelaWeather.setModel(oModel);
 
 					_this.byId('idContainerTable').removeAllContent();
 					
 					_this.byId('idInputCity').resetProperty('value');
 
-					_this.byId('idContainerTable').addContent(oTabelaDetalhe);
+					_this.byId('idContainerTable').addContent(oTabelaWeather);
 				} catch (error) {
 					console.error('Error during forecast table setup');
 				}
