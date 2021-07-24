@@ -87,7 +87,7 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 #### Option 2 - Deploy the app on the SAP Netweaver AS as an BSP Application:
   Import the content of the **webapp folder** to the SAP Netweaver AS using the **/ui5/ui5_repository_load** ABAP report program.
 
-## Autor
+## Author
 
 <a href="https://www.linkedin.com/in/filemom-barbosa-14095372/">
  <img style="border-radius: 50%;" src="https://avatars.services.sap.com/images/filemombarbosa.png" width="100px;" alt=""/>
