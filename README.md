@@ -1,6 +1,6 @@
 <p align="center">
   <a href="#">
-    <img src="https://iili.io/oRYR6J.png" width="234" height="163" alt="" />
+    <img src="http://sapcodeplace.com/assets/fioriweatherapplogo.png" width="234" height="163" alt="" />
   </a>
 </p>
 
