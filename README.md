@@ -46,7 +46,7 @@ npm start
 PORT=[PORT NUMBER] npm start
 ```
 
-Open the following URL in yout browser:
+Open the following URL in your browser:
 ```bash
 http://localhost:[PORT NUMBER]/index.html 
 ```
@@ -71,7 +71,7 @@ http://localhost:9091/index.html
 # Get the url of the Unit Tests runner
 npm test
 ``` -->
-Open the following URL in yout browser:
+Open the following URL in your browser:
 ```bash
 http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ```
