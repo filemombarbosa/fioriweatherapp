@@ -646,12 +646,12 @@ sap.ui.define([
 						"size": "Responsive",
 						"threshold": 40,
 						"chartTwoColors": {
-							"showPoints": true,
+							"showPoints": false,
 							"color": {"above": "Good", "below": "Error"}
 						},
 						"chartNoThreshold": {
 							"threshold": null,
-							"showPoints": true,
+							"showPoints": false,
 							"color": {"above": "Good", "below": "Critical"}
 						}
 					}
