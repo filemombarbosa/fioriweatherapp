@@ -7,7 +7,7 @@ sap.ui.define([
 
 	QUnit.module("Unit tests for Dashboard Controller");
 
-		QUnit.test("It should find all main functions", function (assert) {
+		QUnit.test("Should find all main functions", function (assert) {
 			var oController 		= new Controller();
 			var oControllerMethod 	= oController.getMetadata().getAllMethods();
 			var sAllFunctionsExist 	= true;
@@ -50,7 +50,7 @@ sap.ui.define([
 			assert.ok(sAllFunctionsExist);		
 		});
 
-		QUnit.test("It should find the Weather API Key", function (assert) {
+		QUnit.test("Should find the Weather API Key", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -65,7 +65,7 @@ sap.ui.define([
 			});
 		});
 
-		QUnit.test("It should validate the Weather API Key", function (assert) {
+		QUnit.test("Should validate the Weather API Key", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -80,7 +80,7 @@ sap.ui.define([
 			});
 		});
 
-		QUnit.test("It should check the Weather API Key service status", function (assert) {
+		QUnit.test("Should check the Weather API Key service status", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -95,7 +95,7 @@ sap.ui.define([
 			});
 		});
 
-		QUnit.test("It should get the config model", function (assert) {
+		QUnit.test("Should get the config model", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -110,7 +110,7 @@ sap.ui.define([
 			});
 		});
 		
-		QUnit.test("It should get the city model", function (assert) {
+		QUnit.test("Should get the city model", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -125,7 +125,7 @@ sap.ui.define([
 			});
 		});
 
-		QUnit.test("It should get the weather forecast for a given city", function (assert) {
+		QUnit.test("Should get the weather forecast for a given city", function (assert) {
 			var done 		= assert.async();
 			var oController = new Controller();
 
@@ -140,13 +140,13 @@ sap.ui.define([
 			});
 		});
 
-		QUnit.test("It should convert UTC time to dd/mm/yyyy format", function (assert) {
+		QUnit.test("Should convert UTC time to dd/mm/yyyy format", function (assert) {
 			var oController = new Controller();
 			var result = oController.formatDateUtc(1626317953);
 			assert.equal(result, '14/07/2021');
 		});
 
-		QUnit.test("It should return the day for a given date", function (assert) {
+		QUnit.test("Should return the day for a given date", function (assert) {
 			var oController = new Controller();
 			var result = oController.getDayNameFromDate('2021-07-14');
 			assert.equal(result, 'Wednesday');
