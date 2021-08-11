@@ -18,7 +18,7 @@
 					<ToolbarSpacer/>
 					<HBox>
 						<Label text="{i18n>darkMode}" />
-						<Switch change=".changeTheme" state="false" customTextOn="{i18n>on}" customTextOff="{i18n>off}">
+						<Switch id="idThemeBtn" change=".changeTheme" state="false" customTextOn="{i18n>on}" customTextOff="{i18n>off}">
 							<layoutData>
 								<FlexItemData growFactor="1" />
 							</layoutData>

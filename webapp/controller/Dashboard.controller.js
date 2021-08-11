@@ -318,6 +318,7 @@ sap.ui.define([
 
 				try {
 					var oTabelaWeather = new sap.m.Table({
+						id: 'idTableWeather',
 						growing: true,
 						growingThreshold: 20,						
 						columns: [

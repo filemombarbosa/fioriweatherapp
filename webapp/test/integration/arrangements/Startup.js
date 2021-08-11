@@ -8,17 +8,21 @@ sap.ui.define([
 		iStartMyApp: function (oOptionsParameter) {
 			var oOptions = oOptionsParameter || {};
 
-			// start the app with a minimal delay to make tests fast but still async to discover basic timing issues
-			oOptions.delay = oOptions.delay || 50;
+			oOptions.delay = oOptions.delay || 1;
+
+			if (jQuery(".sapUiOpaComponent").length !== 0) {
+                this.iTeardownMyUIComponent();
+			}	
 
 			// start the app UI component
 			this.iStartMyUIComponent({
 				componentConfig: {
 					name: "fioriweatherapp",
-					async: true
+					async: true,
+					manifest: true
 				},
 				hash: oOptions.hash,
-				autoWait: oOptions.autoWait
+				autoWait: oOptions.autoWait || true
 			});
 		}
 	});

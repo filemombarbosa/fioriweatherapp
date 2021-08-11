@@ -76,6 +76,12 @@ Open the following URL in your browser:
 http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 ```
 
+### How to run the Integration Tests 
+Open the following URL in your browser:
+```bash
+http://localhost:[PORT NUMBER]/test/integration/opaTests.qunit.html
+```
+
 ### How to deploy the app
 
 #### Option 1 - Generic Web Hosting:
@@ -89,11 +95,11 @@ http://localhost:[PORT NUMBER]/test/unit/unitTests.qunit.html
 
 ## Author
 
-<a href="https://www.linkedin.com/in/filemom-barbosa-14095372/">
+<a href="https://www.linkedin.com/in/filemomb/">
  <img style="border-radius: 50%;" src="https://avatars.services.sap.com/images/filemombarbosa.png" width="100px;" alt=""/>
  <br />
  <sub><b>Filemom Barbosa</b></sub></a> <a href="https://github.com/filemombarbosa title="Github">🚀</a>  <br /><br />
 
 [![Sap Badge](https://img.shields.io/badge/-@filemombarbosa-1ca0f1?style=flat-square&labelColor=1ca0f1&logo=sap&logoColor=white&link=https://twitter.com/filemombarbosa)](https://people.sap.com/filemombarbosa) 
-[![Linkedin Badge](https://img.shields.io/badge/-Filemom-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filemombarbosa/)](https://www.linkedin.com/in/filemom-barbosa-14095372/) 
+[![Linkedin Badge](https://img.shields.io/badge/-Filemom-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/filemombarbosa/)](https://www.linkedin.com/in/filemomb/) 
 [![Gmail Badge](https://img.shields.io/badge/-filemombarbosa@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:filemombarbosa@gmail.com)](mailto:filemombarbosa@gmail.com)
